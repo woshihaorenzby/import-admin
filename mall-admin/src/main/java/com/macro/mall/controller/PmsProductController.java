@@ -6,6 +6,7 @@ import com.macro.mall.dto.PmsProductParam;
 import com.macro.mall.dto.PmsProductQueryParam;
 import com.macro.mall.dto.PmsProductResult;
 import com.macro.mall.model.PmsProduct;
+import com.macro.mall.security.util.JwtTokenUtil;
 import com.macro.mall.service.PmsProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -26,6 +28,8 @@ import java.util.List;
 public class PmsProductController {
     @Autowired
     private PmsProductService productService;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @ApiOperation("创建商品")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -62,12 +66,12 @@ public class PmsProductController {
     @ApiOperation("查询商品")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<CommonPage<PmsProduct>> getList(PmsProductQueryParam productQueryParam,
+    public CommonResult<CommonPage<PmsProduct>> getList(HttpServletRequest request, PmsProductQueryParam productQueryParam,
                                                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsProduct> productList = productService.list(productQueryParam, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(productList));
-    }
+}
 
     @ApiOperation("根据商品名称或货号模糊查询")
     @RequestMapping(value = "/simpleList", method = RequestMethod.GET)
