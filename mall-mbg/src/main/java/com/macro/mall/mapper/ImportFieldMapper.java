@@ -19,4 +19,6 @@ public interface ImportFieldMapper {
     int updateByExampleSelective(@Param("record") ImportField record, @Param("example") ImportFieldExample example);
 
     int updateByExample(@Param("record") ImportField record, @Param("example") ImportFieldExample example);
+
+    List<ImportField> listAllByRoleId(ImportField importField);
 }

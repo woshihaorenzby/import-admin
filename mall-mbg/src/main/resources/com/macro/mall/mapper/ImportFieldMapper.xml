@@ -208,7 +208,15 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="listAllByRoleId" resultType="com.macro.mall.model.ImportField" parameterType="com.macro.mall.model.ImportField">
+      select
+      <include refid="Base_Column_List" />
+      from import_field
+      <if test="roleId != null">
+        where role_id = #{roleId,jdbcType=INTEGER}
+      </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update import_field
     <set>
       <if test="record.id != null">

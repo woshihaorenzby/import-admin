@@ -43,7 +43,7 @@ public class ImportField implements Serializable {
     private Integer remark3;
 
     @ApiModelProperty(value = "角色id")
-    private Integer roleId;
+    private Long roleId;
 
     private static final long serialVersionUID = 1L;
 
@@ -151,11 +151,30 @@ public class ImportField implements Serializable {
         this.remark3 = remark3;
     }
 
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public ImportField() {}
+
+    public ImportField(Integer id, Integer importMonth, Integer importDay, Integer aInfo, Integer wangwangId, Integer aPrice, Integer storeName, Integer bPrice, Integer commission, Integer bInfo, Integer remark1, Integer remark2, Integer remark3) {
+        this.id = id;
+        this.importMonth = importMonth;
+        this.importDay = importDay;
+        this.aInfo = aInfo;
+        this.wangwangId = wangwangId;
+        this.aPrice = aPrice;
+        this.storeName = storeName;
+        this.bPrice = bPrice;
+        this.commission = commission;
+        this.bInfo = bInfo;
+        this.remark1 = remark1;
+        this.remark2 = remark2;
+        this.remark3 = remark3;
         this.roleId = roleId;
     }
 
