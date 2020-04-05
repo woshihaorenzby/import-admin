@@ -217,6 +217,26 @@ create table import_data
 );
 
 
+create table import_field
+(
+    id           int           null,
+    import_month int default 0 not null comment '是否显示导入月，一般与import_day保持一致',
+    import_day   int default 0 not null comment '是否显示导入月，一般与import_month保持一致',
+    a_info       int default 0 not null comment '是否显示a信息',
+    wangwang_id  int default 0 not null comment '是否显示旺旺号',
+    a_price      int default 0 not null comment '是否显示a金额',
+    store_name   int default 0 not null comment '是否显示店铺名称',
+    b_price      int default 0 not null comment '是否显示b金额',
+    commission   int default 0 not null comment '是否显示佣金',
+    b_info       int default 0 not null comment '是否显示b信息',
+    remark_1     int default 0 not null comment '是否显示备注1',
+    remark_2     int default 0 not null comment '是否显示备注2',
+    remark_3     int default 0 not null comment '是否显示备注3',
+    role_id      int           not null comment '角色id'
+)
+    comment '字段权限';
+
+
 create table oms_cart_item
 (
     id                  bigint auto_increment
@@ -2014,6 +2034,7 @@ INSERT INTO import.ums_resource (id, create_time, name, url, description, catego
 INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (27, '2020-02-07 16:48:48', '后台菜单管理', '/menu/**', '', 4);
 INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (28, '2020-02-07 16:49:18', '后台资源分类管理', '/resourceCategory/**', '', 4);
 INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (29, '2020-02-07 16:49:45', '后台资源管理', '/resource/**', '', 4);
+INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (30, '2020-04-05 10:17:44', '数据', '/importData/*', '', 7);
 create table ums_resource_category
 (
     id          bigint auto_increment
@@ -2030,6 +2051,7 @@ INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (3
 INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (4, '2020-02-05 10:23:04', '权限模块', 0);
 INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (5, '2020-02-07 16:34:27', '内容模块', 0);
 INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (6, '2020-02-07 16:35:49', '其他模块', 0);
+INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (7, '2020-04-05 10:17:19', '数据', 1);
 create table ums_role
 (
     id          bigint auto_increment
@@ -2138,31 +2160,32 @@ INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES 
 INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (183, 1, 6);
 INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (184, 1, 23);
 INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (185, 1, 24);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (186, 5, 1);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (187, 5, 2);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (188, 5, 3);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (189, 5, 4);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (190, 5, 5);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (191, 5, 6);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (192, 5, 8);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (193, 5, 9);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (194, 5, 10);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (195, 5, 11);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (196, 5, 12);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (197, 5, 13);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (198, 5, 14);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (199, 5, 15);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (200, 5, 16);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (201, 5, 17);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (202, 5, 18);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (203, 5, 19);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (204, 5, 20);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (205, 5, 21);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (206, 5, 22);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (207, 5, 23);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (208, 5, 24);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (209, 5, 25);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (210, 5, 26);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (211, 5, 27);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (212, 5, 28);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (213, 5, 29);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (272, 5, 1);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (273, 5, 2);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (274, 5, 3);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (275, 5, 4);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (276, 5, 5);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (277, 5, 6);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (278, 5, 8);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (279, 5, 9);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (280, 5, 10);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (281, 5, 11);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (282, 5, 12);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (283, 5, 13);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (284, 5, 14);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (285, 5, 15);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (286, 5, 16);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (287, 5, 17);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (288, 5, 18);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (289, 5, 19);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (290, 5, 20);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (291, 5, 21);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (292, 5, 22);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (293, 5, 23);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (294, 5, 24);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (295, 5, 25);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (296, 5, 26);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (297, 5, 27);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (298, 5, 28);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (299, 5, 29);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (300, 5, 30);
