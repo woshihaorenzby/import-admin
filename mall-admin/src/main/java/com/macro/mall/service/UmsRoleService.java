@@ -74,5 +74,5 @@ public interface UmsRoleService {
      * 给角色分配资源
      */
     @Transactional
-    int allocResource(Long roleId, List<Long> resourceIds);
+    int allocResource(Long roleId, List<Long> resourceIds, List<String> fields);
 }

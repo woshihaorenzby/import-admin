@@ -1,5 +1,6 @@
 package com.macro.mall.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.macro.mall.dao.UmsRoleDao;
 import com.macro.mall.dao.UmsRolePermissionRelationDao;
@@ -8,14 +9,13 @@ import com.macro.mall.mapper.UmsRoleMenuRelationMapper;
 import com.macro.mall.mapper.UmsRolePermissionRelationMapper;
 import com.macro.mall.mapper.UmsRoleResourceRelationMapper;
 import com.macro.mall.model.*;
+import com.macro.mall.service.ImportFieldService;
 import com.macro.mall.service.UmsRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 后台角色管理Service实现类
@@ -35,6 +35,8 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     private UmsRolePermissionRelationDao rolePermissionRelationDao;
     @Autowired
     private UmsRoleDao roleDao;
+    @Autowired
+    private ImportFieldService importFieldService;
     @Override
     public int create(UmsRole role) {
         role.setCreateTime(new Date());
@@ -125,7 +127,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     }
 
     @Override
-    public int allocResource(Long roleId, List<Long> resourceIds) {
+    public int allocResource(Long roleId, List<Long> resourceIds, List<String> fields) {
         //先删除原有关系
         UmsRoleResourceRelationExample example=new UmsRoleResourceRelationExample();
         example.createCriteria().andRoleIdEqualTo(roleId);
@@ -137,6 +139,18 @@ public class UmsRoleServiceImpl implements UmsRoleService {
             relation.setResourceId(resourceId);
             roleResourceRelationMapper.insert(relation);
         }
+        ImportFieldExample ex = new ImportFieldExample();
+        ex.createCriteria().andRoleIdEqualTo(roleId);
+        this.importFieldService.deleteByExample(ex);
+        Map<String,Object> fieldMap = new HashMap<>();
+        if(fields!=null&&!fields.isEmpty()){
+            for (String f: fields) {
+                fieldMap.put(f,1);
+            }
+        }
+        fieldMap.put("roleId",roleId);
+        ImportField field = JSON.parseObject(JSON.toJSONString(fieldMap), ImportField.class);
+        this.importFieldService.insertSelective(field);
         return resourceIds.size();
     }
 }

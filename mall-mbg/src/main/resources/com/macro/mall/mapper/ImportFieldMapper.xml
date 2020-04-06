@@ -5,13 +5,13 @@
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="import_month" jdbcType="INTEGER" property="importMonth" />
     <result column="import_day" jdbcType="INTEGER" property="importDay" />
-    <result column="a_info" jdbcType="INTEGER" property="aInfo" />
+    <result column="a_info" jdbcType="INTEGER" property="AInfo" />
     <result column="wangwang_id" jdbcType="INTEGER" property="wangwangId" />
-    <result column="a_price" jdbcType="INTEGER" property="aPrice" />
+    <result column="a_price" jdbcType="INTEGER" property="APrice" />
     <result column="store_name" jdbcType="INTEGER" property="storeName" />
-    <result column="b_price" jdbcType="INTEGER" property="bPrice" />
+    <result column="b_price" jdbcType="INTEGER" property="BPrice" />
     <result column="commission" jdbcType="INTEGER" property="commission" />
-    <result column="b_info" jdbcType="INTEGER" property="bInfo" />
+    <result column="b_info" jdbcType="INTEGER" property="BInfo" />
     <result column="remark_1" jdbcType="INTEGER" property="remark1" />
     <result column="remark_2" jdbcType="INTEGER" property="remark2" />
     <result column="remark_3" jdbcType="INTEGER" property="remark3" />
@@ -76,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, 
-    commission, b_info, remark_1, remark_2, remark_3, role_id
+    id as id, import_month as importMonth, import_day as importDay, a_info as aInfo, wangwang_id as wangwangId, a_price as aPrice , store_name as storeName, b_price as bPrice,
+    commission as commission, b_info as bInfo, remark_1 as remark1, remark_2 as remark2, remark_3 as remark3, role_id as roleId
   </sql>
   <select id="selectByExample" parameterType="com.macro.mall.model.ImportFieldExample" resultMap="BaseResultMap">
     select

@@ -1,6 +1,7 @@
 package com.macro.mall.service;
 
 import com.macro.mall.model.ImportField;
+import com.macro.mall.model.ImportFieldExample;
 import com.macro.mall.model.UmsMemberLevel;
 
 import java.util.List;
@@ -16,4 +17,20 @@ public interface ImportFieldService {
      * @param importField 是否为默认会员
      */
     List<Map<String,Object>> listAllByRoleId(ImportField importField);
+
+    /**
+     * 删除
+     *
+     * @param example
+     * @return
+     */
+    int deleteByExample(ImportFieldExample example);
+
+    /**
+     * 添加
+     *
+     * @param record
+     * @return
+     */
+    int insertSelective(ImportField record);
 }

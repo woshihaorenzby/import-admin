@@ -135,7 +135,7 @@ public class UmsRoleController {
     @RequestMapping(value = "/allocResource", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult allocResource(@RequestParam Long roleId, @RequestParam List<Long> resourceIds,@RequestParam List<String> fields) {
-        int count = roleService.allocResource(roleId, resourceIds);
+        int count = roleService.allocResource(roleId, resourceIds,fields);
         return CommonResult.success(count);
     }
 

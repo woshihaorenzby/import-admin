@@ -2,6 +2,7 @@ package com.macro.mall.service.impl;
 
 import com.macro.mall.mapper.ImportFieldMapper;
 import com.macro.mall.model.ImportField;
+import com.macro.mall.model.ImportFieldExample;
 import com.macro.mall.service.ImportDataService;
 import com.macro.mall.service.ImportFieldService;
 import io.swagger.annotations.ApiModelProperty;
@@ -45,7 +46,7 @@ public class ImportFieldServiceImpl implements ImportFieldService {
             }
         }
         if (field == null) {
-            field = new ImportField(0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0);
+            field = new ImportField(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
         try {
             Class clazz = Class.forName("com.macro.mall.model.ImportField");
@@ -72,6 +73,16 @@ public class ImportFieldServiceImpl implements ImportFieldService {
         }
 
         return list;
+    }
+
+    @Override
+    public int deleteByExample(ImportFieldExample example) {
+        return this.importFieldMapper.deleteByExample(example);
+    }
+
+    @Override
+    public int insertSelective(ImportField record) {
+        return this.importFieldMapper.insertSelective(record);
     }
 
 }
