@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 后台资源管理Controller
@@ -30,10 +31,11 @@ public class ImportFieldResourceController {
     @ApiOperation("添加后台资源")
     @RequestMapping(value = "/listAll/{roleId}", method = RequestMethod.GET)
     @ResponseBody
-    public ImportField listAll(@PathVariable Long roleId) {
+    public CommonResult<List<Map<String,Object>>> listAll(@PathVariable Long roleId) {
         ImportField i = new ImportField();
         i.setRoleId(roleId);
-        return  this.importFieldService.listAllByRoleId(i);
+        List<Map<String,Object>> list = this.importFieldService.listAllByRoleId(i);
+        return  CommonResult.success(list);
     }
 
 

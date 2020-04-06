@@ -134,7 +134,7 @@ public class UmsRoleController {
     @ApiOperation("给角色分配资源")
     @RequestMapping(value = "/allocResource", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult allocResource(@RequestParam Long roleId, @RequestParam List<Long> resourceIds) {
+    public CommonResult allocResource(@RequestParam Long roleId, @RequestParam List<Long> resourceIds,@RequestParam List<String> fields) {
         int count = roleService.allocResource(roleId, resourceIds);
         return CommonResult.success(count);
     }

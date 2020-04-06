@@ -4,6 +4,7 @@ import com.macro.mall.model.ImportField;
 import com.macro.mall.model.UmsMemberLevel;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 会员等级管理Service
@@ -14,5 +15,5 @@ public interface ImportFieldService {
      * 获取所有会员登录
      * @param importField 是否为默认会员
      */
-    ImportField listAllByRoleId(ImportField importField);
+    List<Map<String,Object>> listAllByRoleId(ImportField importField);
 }
