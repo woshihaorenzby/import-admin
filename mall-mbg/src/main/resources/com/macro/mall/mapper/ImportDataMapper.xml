@@ -3,7 +3,7 @@
 <mapper namespace="com.macro.mall.mapper.ImportDataMapper">
   <resultMap id="BaseResultMap" type="com.macro.mall.model.ImportData">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="addTime" jdbcType="DATE" property="addtime" />
+    <result column="addTime" jdbcType="DATE" property="addTime" />
     <result column="import_month" jdbcType="INTEGER" property="importMonth" />
     <result column="import_day" jdbcType="INTEGER" property="importDay" />
     <result column="wangwang_id" jdbcType="VARCHAR" property="wangwangId" />
@@ -141,7 +141,7 @@
       b_price, commission, a_info, 
       b_info, remark_1, remark_2, 
       remark_3)
-    values (#{addtime,jdbcType=DATE}, #{importMonth,jdbcType=INTEGER}, #{importDay,jdbcType=INTEGER}, 
+    values (#{addTime,jdbcType=DATE}, #{importMonth,jdbcType=INTEGER}, #{importDay,jdbcType=INTEGER},
       #{wangwangId,jdbcType=VARCHAR}, #{aPrice,jdbcType=DECIMAL}, #{storeName,jdbcType=VARCHAR}, 
       #{bPrice,jdbcType=DECIMAL}, #{commission,jdbcType=DECIMAL}, #{aInfo,jdbcType=LONGVARCHAR}, 
       #{bInfo,jdbcType=LONGVARCHAR}, #{remark1,jdbcType=LONGVARCHAR}, #{remark2,jdbcType=LONGVARCHAR}, 
@@ -153,7 +153,7 @@
     </selectKey>
     insert into import_data
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="addtime != null">
+      <if test="addTime != null">
         addTime,
       </if>
       <if test="importMonth != null">
@@ -194,8 +194,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="addtime != null">
-        #{addtime,jdbcType=DATE},
+      <if test="addTime != null">
+        #{addTime,jdbcType=DATE},
       </if>
       <if test="importMonth != null">
         #{importMonth,jdbcType=INTEGER},
@@ -247,8 +247,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.addtime != null">
-        addTime = #{record.addtime,jdbcType=DATE},
+      <if test="record.addTime != null">
+        addTime = #{record.addTime,jdbcType=DATE},
       </if>
       <if test="record.importMonth != null">
         import_month = #{record.importMonth,jdbcType=INTEGER},
@@ -294,7 +294,7 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update import_data
     set id = #{record.id,jdbcType=INTEGER},
-      addTime = #{record.addtime,jdbcType=DATE},
+      addTime = #{record.addTime,jdbcType=DATE},
       import_month = #{record.importMonth,jdbcType=INTEGER},
       import_day = #{record.importDay,jdbcType=INTEGER},
       wangwang_id = #{record.wangwangId,jdbcType=VARCHAR},
@@ -314,7 +314,7 @@
   <update id="updateByExample" parameterType="map">
     update import_data
     set id = #{record.id,jdbcType=INTEGER},
-      addTime = #{record.addtime,jdbcType=DATE},
+      addTime = #{record.addTime,jdbcType=DATE},
       import_month = #{record.importMonth,jdbcType=INTEGER},
       import_day = #{record.importDay,jdbcType=INTEGER},
       wangwang_id = #{record.wangwangId,jdbcType=VARCHAR},
@@ -329,8 +329,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.ImportData">
     update import_data
     <set>
-      <if test="addtime != null">
-        addTime = #{addtime,jdbcType=DATE},
+      <if test="addTime != null">
+        addTime = #{addTime,jdbcType=DATE},
       </if>
       <if test="importMonth != null">
         import_month = #{importMonth,jdbcType=INTEGER},
@@ -373,7 +373,7 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.macro.mall.model.ImportData">
     update import_data
-    set addTime = #{addtime,jdbcType=DATE},
+    set addTime = #{addTime,jdbcType=DATE},
       import_month = #{importMonth,jdbcType=INTEGER},
       import_day = #{importDay,jdbcType=INTEGER},
       wangwang_id = #{wangwangId,jdbcType=VARCHAR},
@@ -390,7 +390,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.ImportData">
     update import_data
-    set addTime = #{addtime,jdbcType=DATE},
+    set addTime = #{addTime,jdbcType=DATE},
       import_month = #{importMonth,jdbcType=INTEGER},
       import_day = #{importDay,jdbcType=INTEGER},
       wangwang_id = #{wangwangId,jdbcType=VARCHAR},

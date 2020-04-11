@@ -2,6 +2,7 @@ package com.macro.mall.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class ImportData implements Serializable {
@@ -9,28 +10,28 @@ public class ImportData implements Serializable {
     private Integer id;
 
     @ApiModelProperty(value = "添加时间")
-    private Date addtime;
+    private Date addTime;
 
     @ApiModelProperty(value = "导入的月份，用户自定义")
     private Integer importMonth;
 
-    @ApiModelProperty(value = "导入日期，用户自定义")
+    @ApiModelProperty(value = "日期")
     private Integer importDay;
 
     @ApiModelProperty(value = "旺旺号")
     private String wangwangId;
 
     @ApiModelProperty(value = "A金额")
-    private Long aPrice;
+    private BigDecimal aPrice;
 
     @ApiModelProperty(value = "店名")
     private String storeName;
 
     @ApiModelProperty(value = "B金额")
-    private Long bPrice;
+    private BigDecimal bPrice;
 
     @ApiModelProperty(value = "佣金")
-    private Long commission;
+    private BigDecimal commission;
 
     @ApiModelProperty(value = "A信息")
     private String aInfo;
@@ -57,12 +58,12 @@ public class ImportData implements Serializable {
         this.id = id;
     }
 
-    public Date getAddtime() {
-        return addtime;
+    public Date getAddTime() {
+        return addTime;
     }
 
-    public void setAddtime(Date addtime) {
-        this.addtime = addtime;
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 
     public Integer getImportMonth() {
@@ -89,11 +90,11 @@ public class ImportData implements Serializable {
         this.wangwangId = wangwangId;
     }
 
-    public Long getaPrice() {
+    public BigDecimal getaPrice() {
         return aPrice;
     }
 
-    public void setaPrice(Long aPrice) {
+    public void setaPrice(BigDecimal aPrice) {
         this.aPrice = aPrice;
     }
 
@@ -105,19 +106,19 @@ public class ImportData implements Serializable {
         this.storeName = storeName;
     }
 
-    public Long getbPrice() {
+    public BigDecimal getbPrice() {
         return bPrice;
     }
 
-    public void setbPrice(Long bPrice) {
+    public void setbPrice(BigDecimal bPrice) {
         this.bPrice = bPrice;
     }
 
-    public Long getCommission() {
+    public BigDecimal getCommission() {
         return commission;
     }
 
-    public void setCommission(Long commission) {
+    public void setCommission(BigDecimal commission) {
         this.commission = commission;
     }
 
@@ -168,7 +169,7 @@ public class ImportData implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", addtime=").append(addtime);
+        sb.append(", addTime=").append(addTime);
         sb.append(", importMonth=").append(importMonth);
         sb.append(", importDay=").append(importDay);
         sb.append(", wangwangId=").append(wangwangId);
