@@ -56,7 +56,6 @@ public class ClassUtil {
                 Method method = objectClass.getMethod(getMethodName, new Class[]{});
                 methodList.add(method);
             } catch (NoSuchMethodException e) {
-                e.printStackTrace();
             }
         }
         return methodList;

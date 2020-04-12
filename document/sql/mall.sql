@@ -201,25 +201,44 @@ create table import_data
 (
     id           int auto_increment comment '主键'
         primary key,
-    addTime      date          null comment '添加时间',
-    import_month int default 1 null comment '导入的月份，用户自定义',
-    import_day   int default 1 null comment '导入日期，用户自定义',
-    a_info       longtext      null comment 'A信息',
-    wangwang_id  varchar(255)  null comment '旺旺号',
-    a_price      decimal       null comment 'A金额',
-    store_name   varchar(255)  null comment '店名',
-    b_price      decimal       null comment 'B金额',
-    commission   decimal       null comment '佣金',
-    b_info       longtext      null comment 'B信息',
-    remark_1     longtext      null comment '备注1',
-    remark_2     longtext      null comment '备注2',
-    remark_3     longtext      null comment '备注3'
+    addTime      date           null comment '添加时间',
+    import_month int default 1  null comment '导入的月份，用户自定义',
+    import_day   int default 1  null comment '导入日期，用户自定义',
+    a_info       longtext       null comment 'A信息',
+    wangwang_id  varchar(255)   null comment '旺旺号',
+    a_price      decimal(10, 2) null comment 'A金额',
+    store_name   varchar(255)   null comment '店名',
+    b_price      decimal(10, 2) null comment 'B金额',
+    commission   decimal(10, 2) null comment '佣金',
+    b_info       longtext       null comment 'B信息',
+    remark_1     longtext       null comment '备注1',
+    remark_2     longtext       null comment '备注2',
+    remark_3     longtext       null comment '备注3'
 );
 
-
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (7, '2020-04-11', null, null, '呀呀呀', '我是好人吗？', 5.80, '我我我', 18.90, 11.00, '顶顶顶顶', '231', '12457对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (8, '2020-04-11', null, null, '嗯嗯嗯', '我是好人', 4.80, '我我我', 17.80, 10.60, '顶顶顶顶', '111', '222', '333');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (10, '2020-04-12', null, null, '啦啦啦', '我是好人123', 100.00, '嗯嗯嗯', 1000.00, 800.00, '呵呵呵', '1223', '1234', '12344');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (16, '2020-04-13', null, null, '呀呀呀', '我是好人', 9.80, '我我我', 22.80, 15.60, '顶顶顶顶', '236', '12462对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (17, '2020-04-13', null, null, '呀呀呀', '我是好人', 10.80, '我我我', 23.80, 16.60, '顶顶顶顶', '237', '12463对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (18, '2020-04-13', null, null, '呀呀呀', '我是好人', 11.80, '我我我', 24.80, 17.60, '顶顶顶顶', '238', '12464对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (19, '2020-04-13', null, null, '呀呀呀', '我是好人', 12.80, '我我我', 25.80, 18.60, '顶顶顶顶', '239', '12465对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (20, '2020-04-13', null, null, '呀呀呀', '我是好人', 13.80, '我我我', 26.80, 19.60, '顶顶顶顶', '240', '12466对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (21, '2020-04-13', null, null, '呀呀呀', '我是好人', 14.80, '我我我', 27.80, 20.60, '顶顶顶顶', '241', '12467对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (22, '2020-04-13', null, null, '呀呀呀', '我是好人', 15.80, '我我我', 28.80, 21.60, '顶顶顶顶', '242', '12468对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (23, '2020-04-13', null, null, '呀呀呀', '我是好人', 16.80, '我我我', 29.80, 22.60, '顶顶顶顶', '243', '12469对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (24, '2020-04-13', null, null, '呀呀呀', '我是好人', 17.80, '我我我', 30.80, 23.60, '顶顶顶顶', '244', '12470对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (25, '2020-04-13', null, null, '呀呀呀', '我是好人', 18.80, '我我我', 31.80, 24.60, '顶顶顶顶', '245', '12471对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (26, '2020-04-13', null, null, '呀呀呀', '我是好人', 19.80, '我我我', 32.80, 25.60, '顶顶顶顶', '246', '12472对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (27, '2020-04-13', null, null, '呀呀呀', '我是好人', 20.80, '我我我', 33.80, 26.60, '顶顶顶顶', '247', '12473对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (28, '2020-04-13', null, null, '呀呀呀', '我是好人', 21.80, '我我我', 34.80, 27.60, '顶顶顶顶', '248', '12474对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (29, '2020-04-13', null, null, '呀呀呀', '我是好人', 22.80, '我我我', 35.80, 28.60, '顶顶顶顶', '249', '12475对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (30, '2020-04-13', null, null, '呀呀呀', '我是好人', 23.80, '我我我', 36.80, 29.60, '顶顶顶顶', '250', '12476对对对', '大家看得见');
+INSERT INTO import.import_data (id, addTime, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3) VALUES (31, '2020-04-13', null, null, '呀呀呀', '我是好人', 24.80, '我我我', 37.80, 30.60, '顶顶顶顶', '251', '12477对对对', '大家看得见');
 create table import_field
 (
-    id           int           null,
+    id           int auto_increment
+        primary key,
     import_month int default 0 not null comment '是否显示导入月，一般与import_day保持一致',
     import_day   int default 0 not null comment '是否显示导入月，一般与import_month保持一致',
     a_info       int default 0 not null comment '是否显示a信息',
@@ -236,7 +255,9 @@ create table import_field
 )
     comment '字段权限';
 
-
+INSERT INTO import.import_field (id, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3, role_id) VALUES (5, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2);
+INSERT INTO import.import_field (id, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3, role_id) VALUES (13, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+INSERT INTO import.import_field (id, import_month, import_day, a_info, wangwang_id, a_price, store_name, b_price, commission, b_info, remark_1, remark_2, remark_3, role_id) VALUES (14, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5);
 create table oms_cart_item
 (
     id                  bigint auto_increment
@@ -1679,6 +1700,17 @@ INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, 
 INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (202, 1, '2020-04-03 23:20:13', '0:0:0:0:0:0:0:1', null, null);
 INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (203, 1, '2020-04-03 23:25:30', '0:0:0:0:0:0:0:1', null, null);
 INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (204, 3, '2020-04-04 22:05:56', '0:0:0:0:0:0:0:1', null, null);
+INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (205, 3, '2020-04-05 23:14:36', '0:0:0:0:0:0:0:1', null, null);
+INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (206, 3, '2020-04-06 22:41:57', '0:0:0:0:0:0:0:1', null, null);
+INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (207, 3, '2020-04-08 21:11:19', '0:0:0:0:0:0:0:1', null, null);
+INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (208, 3, '2020-04-09 00:55:40', '0:0:0:0:0:0:0:1', null, null);
+INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (209, 3, '2020-04-09 22:14:53', '0:0:0:0:0:0:0:1', null, null);
+INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (210, 3, '2020-04-11 00:38:40', '0:0:0:0:0:0:0:1', null, null);
+INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (211, 3, '2020-04-11 22:16:44', '0:0:0:0:0:0:0:1', null, null);
+INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (212, 3, '2020-04-12 03:42:35', '0:0:0:0:0:0:0:1', null, null);
+INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (213, 3, '2020-04-12 14:49:47', '0:0:0:0:0:0:0:1', null, null);
+INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (214, 1, '2020-04-13 04:05:28', '0:0:0:0:0:0:0:1', null, null);
+INSERT INTO import.ums_admin_login_log (id, admin_id, create_time, ip, address, user_agent) VALUES (215, 3, '2020-04-13 04:06:39', '0:0:0:0:0:0:0:1', null, null);
 create table ums_admin_permission_relation
 (
     id            bigint auto_increment
@@ -1702,8 +1734,8 @@ create table ums_admin_role_relation
 INSERT INTO import.ums_admin_role_relation (id, admin_id, role_id) VALUES (26, 3, 5);
 INSERT INTO import.ums_admin_role_relation (id, admin_id, role_id) VALUES (27, 6, 1);
 INSERT INTO import.ums_admin_role_relation (id, admin_id, role_id) VALUES (28, 7, 2);
-INSERT INTO import.ums_admin_role_relation (id, admin_id, role_id) VALUES (29, 1, 5);
 INSERT INTO import.ums_admin_role_relation (id, admin_id, role_id) VALUES (30, 4, 5);
+INSERT INTO import.ums_admin_role_relation (id, admin_id, role_id) VALUES (31, 1, 1);
 create table ums_growth_change_history
 (
     id           bigint auto_increment
@@ -1936,17 +1968,10 @@ create table ums_menu
     comment '后台菜单表' charset = utf8;
 
 INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (1, 0, '2020-02-02 14:50:36', '数据', 0, 0, 'importData', 'product', 0, 1);
-INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (2, 1, '2020-02-02 14:51:50', '商品列表', 1, 0, 'product', 'product-list', 0, 1);
-INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (3, 1, '2020-02-02 14:52:44', '添加商品', 1, 0, 'addProduct', 'product-add', 0, 1);
-INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (4, 1, '2020-02-02 14:53:51', '商品分类', 1, 0, 'productCate', 'product-cate', 0, 1);
-INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (5, 1, '2020-02-02 14:54:51', '商品类型', 1, 0, 'productAttr', 'product-attr', 0, 1);
-INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (6, 1, '2020-02-02 14:56:29', '品牌管理', 1, 0, 'brand', 'product-brand', 0, 1);
-INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (7, 0, '2020-02-02 16:54:07', '订单', 0, 0, 'oms', 'order', 0, 1);
 INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (8, 7, '2020-02-02 16:55:18', '订单列表', 1, 0, 'order', 'product-list', 0, 1);
 INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (9, 7, '2020-02-02 16:56:46', '订单设置', 1, 0, 'orderSetting', 'order-setting', 0, 1);
 INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (10, 7, '2020-02-02 16:57:39', '退货申请处理', 1, 0, 'returnApply', 'order-return', 0, 1);
 INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (11, 7, '2020-02-02 16:59:40', '退货原因设置', 1, 0, 'returnReason', 'order-return-reason', 0, 1);
-INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (12, 0, '2020-02-04 16:18:00', '营销', 0, 0, 'sms', 'sms', 0, 1);
 INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (13, 12, '2020-02-04 16:19:22', '秒杀活动列表', 1, 0, 'flash', 'sms-flash', 0, 1);
 INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (14, 12, '2020-02-04 16:20:16', '优惠券列表', 1, 0, 'coupon', 'sms-coupon', 0, 1);
 INSERT INTO import.ums_menu (id, parent_id, create_time, title, level, sort, name, icon, hidden, type) VALUES (16, 12, '2020-02-07 16:22:38', '品牌推荐', 1, 0, 'homeBrand', 'product-brand', 0, 1);
@@ -2006,35 +2031,18 @@ create table ums_resource
 )
     comment '后台资源表' charset = utf8;
 
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (1, '2020-02-04 17:04:55', '商品品牌管理', '/brand/**', null, 1);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (2, '2020-02-04 17:05:35', '商品属性分类管理', '/productAttribute/**', null, 1);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (3, '2020-02-04 17:06:13', '商品属性管理', '/productAttribute/**', null, 1);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (4, '2020-02-04 17:07:15', '商品分类管理', '/productCategory/**', null, 1);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (5, '2020-02-04 17:09:16', '商品管理', '/product/**', null, 1);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (6, '2020-02-04 17:09:53', '商品库存管理', '/sku/**', null, 1);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (8, '2020-02-05 14:43:37', '订单管理', '/order/**', '', 2);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (9, '2020-02-05 14:44:22', ' 订单退货申请管理', '/returnApply/**', '', 2);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (10, '2020-02-05 14:45:08', '退货原因管理', '/returnReason/**', '', 2);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (11, '2020-02-05 14:45:43', '订单设置管理', '/orderSetting/**', '', 2);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (12, '2020-02-05 14:46:23', '收货地址管理', '/companyAddress/**', '', 2);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (13, '2020-02-07 16:37:22', '优惠券管理', '/coupon/**', '', 3);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (14, '2020-02-07 16:37:59', '优惠券领取记录管理', '/couponHistory/**', '', 3);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (15, '2020-02-07 16:38:28', '限时购活动管理', '/flash/**', '', 3);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (16, '2020-02-07 16:38:59', '限时购商品关系管理', '/flashProductRelation/**', '', 3);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (17, '2020-02-07 16:39:22', '限时购场次管理', '/flashSession/**', '', 3);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (18, '2020-02-07 16:40:07', '首页轮播广告管理', '/home/advertise/**', '', 3);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (19, '2020-02-07 16:40:34', '首页品牌管理', '/home/brand/**', '', 3);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (20, '2020-02-07 16:41:06', '首页新品管理', '/home/newProduct/**', '', 3);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (21, '2020-02-07 16:42:16', '首页人气推荐管理', '/home/recommendProduct/**', '', 3);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (22, '2020-02-07 16:42:48', '首页专题推荐管理', '/home/recommendSubject/**', '', 3);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (23, '2020-02-07 16:44:56', ' 商品优选管理', '/prefrenceArea/**', '', 5);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (24, '2020-02-07 16:45:39', '商品专题管理', '/subject/**', '', 5);
 INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (25, '2020-02-07 16:47:34', '后台用户管理', '/admin/**', '', 4);
 INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (26, '2020-02-07 16:48:24', '后台用户角色管理', '/role/**', '', 4);
 INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (27, '2020-02-07 16:48:48', '后台菜单管理', '/menu/**', '', 4);
 INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (28, '2020-02-07 16:49:18', '后台资源分类管理', '/resourceCategory/**', '', 4);
 INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (29, '2020-02-07 16:49:45', '后台资源管理', '/resource/**', '', 4);
-INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (30, '2020-04-05 10:17:44', '数据', '/importData/*', '', 7);
+INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (30, '2020-04-05 10:17:44', '删除数据', '/importData/doDeleteByIds', '', 7);
+INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (31, '2020-04-13 03:39:18', '添加数据', '/importData/createImportData', '', 7);
+INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (32, '2020-04-13 03:40:02', '修改数据', '/importData/updateImportData/*', '', 7);
+INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (33, '2020-04-13 03:41:03', '导入数据', '/importData/do_import', '', 7);
+INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (34, '2020-04-13 03:41:43', '导出数据', '/importData/exportData', '', 7);
+INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (35, '2020-04-13 03:42:35', '查询数据', '/importData/listAll/*', '', 7);
+INSERT INTO import.ums_resource (id, create_time, name, url, description, category_id) VALUES (36, '2020-04-13 03:43:24', '导出数据添加模板', '/importData/getTamplate', '', 7);
 create table ums_resource_category
 (
     id          bigint auto_increment
@@ -2045,12 +2053,7 @@ create table ums_resource_category
 )
     comment '资源分类表' charset = utf8;
 
-INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (1, '2020-02-05 10:21:44', '商品模块', 0);
-INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (2, '2020-02-05 10:22:34', '订单模块', 0);
-INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (3, '2020-02-05 10:22:48', '营销模块', 0);
 INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (4, '2020-02-05 10:23:04', '权限模块', 0);
-INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (5, '2020-02-07 16:34:27', '内容模块', 0);
-INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (6, '2020-02-07 16:35:49', '其他模块', 0);
 INSERT INTO import.ums_resource_category (id, create_time, name, sort) VALUES (7, '2020-04-05 10:17:19', '数据', 1);
 create table ums_role
 (
@@ -2065,8 +2068,7 @@ create table ums_role
 )
     comment '后台用户角色表' charset = utf8;
 
-INSERT INTO import.ums_role (id, name, description, admin_count, create_time, status, sort) VALUES (1, '商品管理员', '只能查看及操作商品', 0, '2020-02-03 16:50:37', 1, 0);
-INSERT INTO import.ums_role (id, name, description, admin_count, create_time, status, sort) VALUES (2, '订单管理员', '只能查看及操作订单', 0, '2018-09-30 15:53:45', 1, 0);
+INSERT INTO import.ums_role (id, name, description, admin_count, create_time, status, sort) VALUES (1, '普通用户', '只能查看数据', 0, '2020-02-03 16:50:37', 1, 0);
 INSERT INTO import.ums_role (id, name, description, admin_count, create_time, status, sort) VALUES (5, '超级管理员', '拥有所有查看和操作功能', 0, '2020-02-02 15:11:05', 1, 0);
 create table ums_role_menu_relation
 (
@@ -2077,41 +2079,19 @@ create table ums_role_menu_relation
 )
     comment '后台角色菜单关系表' charset = utf8;
 
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (33, 1, 1);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (34, 1, 2);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (35, 1, 3);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (36, 1, 4);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (37, 1, 5);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (38, 1, 6);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (53, 2, 7);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (54, 2, 8);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (55, 2, 9);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (56, 2, 10);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (57, 2, 11);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (72, 5, 1);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (73, 5, 2);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (74, 5, 3);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (75, 5, 4);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (76, 5, 5);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (77, 5, 6);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (78, 5, 7);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (79, 5, 8);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (80, 5, 9);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (81, 5, 10);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (82, 5, 11);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (83, 5, 12);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (84, 5, 13);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (85, 5, 14);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (86, 5, 16);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (87, 5, 17);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (88, 5, 18);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (89, 5, 19);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (90, 5, 20);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (91, 5, 21);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (92, 5, 22);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (93, 5, 23);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (94, 5, 24);
-INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (95, 5, 25);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (96, 2, 1);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (116, 5, 1);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (117, 5, 21);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (118, 5, 22);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (119, 5, 23);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (120, 5, 24);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (121, 5, 25);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (145, 1, 1);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (146, 1, 21);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (147, 1, 22);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (148, 1, 23);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (149, 1, 24);
+INSERT INTO import.ums_role_menu_relation (id, role_id, menu_id) VALUES (150, 1, 25);
 create table ums_role_permission_relation
 (
     id            bigint auto_increment
@@ -2147,45 +2127,21 @@ create table ums_role_resource_relation
 )
     comment '后台角色资源关系表' charset = utf8;
 
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (103, 2, 8);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (104, 2, 9);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (105, 2, 10);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (106, 2, 11);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (107, 2, 12);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (178, 1, 1);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (179, 1, 2);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (180, 1, 3);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (181, 1, 4);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (182, 1, 5);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (183, 1, 6);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (184, 1, 23);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (185, 1, 24);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (272, 5, 1);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (273, 5, 2);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (274, 5, 3);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (275, 5, 4);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (276, 5, 5);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (277, 5, 6);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (278, 5, 8);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (279, 5, 9);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (280, 5, 10);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (281, 5, 11);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (282, 5, 12);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (283, 5, 13);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (284, 5, 14);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (285, 5, 15);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (286, 5, 16);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (287, 5, 17);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (288, 5, 18);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (289, 5, 19);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (290, 5, 20);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (291, 5, 21);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (292, 5, 22);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (293, 5, 23);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (294, 5, 24);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (295, 5, 25);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (296, 5, 26);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (297, 5, 27);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (298, 5, 28);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (299, 5, 29);
-INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (300, 5, 30);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (329, 2, 8);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (330, 2, 9);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (331, 2, 10);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (332, 2, 11);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (333, 2, 12);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (463, 1, 35);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (464, 5, 25);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (465, 5, 26);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (466, 5, 27);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (467, 5, 28);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (468, 5, 29);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (469, 5, 30);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (470, 5, 31);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (471, 5, 32);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (472, 5, 33);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (473, 5, 34);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (474, 5, 35);
+INSERT INTO import.ums_role_resource_relation (id, role_id, resource_id) VALUES (475, 5, 36);

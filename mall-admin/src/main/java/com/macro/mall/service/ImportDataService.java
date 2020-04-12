@@ -1,5 +1,6 @@
 package com.macro.mall.service;
 
+import com.macro.mall.dto.ImportDateParam;
 import com.macro.mall.model.ImportData;
 import com.macro.mall.model.ImportDataExample;
 
@@ -24,7 +25,7 @@ public interface ImportDataService {
     /**
      * 分页查询专题
      */
-    List<ImportData> list(Long userId,String keyword, Integer pageNum, Integer pageSize);
+    List<ImportData> list(Long userId, ImportDateParam importDateParam, Integer pageNum, Integer pageSize,String fieldName,String sortingType);
 
     /**
      * 导入

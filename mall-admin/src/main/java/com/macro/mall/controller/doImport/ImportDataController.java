@@ -1,10 +1,13 @@
 package com.macro.mall.controller.doImport;
 
 import com.alibaba.fastjson.JSON;
+import com.macro.mall.common.api.CommonPage;
 import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.dto.ImportDateParam;
 import com.macro.mall.dto.PmsBrandParam;
 import com.macro.mall.model.CmsPrefrenceArea;
 import com.macro.mall.model.ImportData;
+import com.macro.mall.model.PmsBrand;
 import com.macro.mall.security.util.JwtTokenUtil;
 import com.macro.mall.service.ImportDataService;
 import com.macro.mall.service.UmsAdminService;
@@ -30,28 +33,30 @@ public class ImportDataController {
     @Autowired
     private UmsAdminService umsAdminService;
 
+    private final static String[] arr = new String[]{"日期","旺旺号","佣金","A金额","A信息","B金额","B信息","店名","备注1","备注2","备注3"};
+
     @ApiOperation("获取所有导入的数据")
-    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
+    @RequestMapping(value = "/listAll/{pageNum}/{pageSize}/{fieldName}/{sortingType}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult<List<ImportData>> listAll(HttpServletRequest request, @RequestParam(value = "keyword", required = false) String keyword,
-                                                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                                  @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+    public CommonResult<CommonPage<ImportData>> listAll(HttpServletRequest request, @RequestBody ImportDateParam importDateParam, @PathVariable("pageNum")Integer pageNum, @PathVariable("pageSize")Integer pageSize, @PathVariable("fieldName")String fieldName, @PathVariable("sortingType")String sortingType) {
         Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
-        List<ImportData> list = this.importDataService.list(userId, keyword, pageNum, pageSize);
-        return CommonResult.success(list);
+        List<ImportData> list = this.importDataService.list(userId, importDateParam, pageNum, pageSize,fieldName,sortingType);
+        return CommonResult.success(CommonPage.restPage(list));
     }
     @ApiOperation("导出模板")
     @PostMapping(value = "/getTamplate", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public void getTamplate(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "keyword", required = false) String keyword,
-                            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                            @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+    public void getTamplate(HttpServletRequest request, HttpServletResponse response) {
         Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
 
-        //创建一个数组用于设置表头
-        String[] arr = new String[]{"日期","旺旺号","佣金","A金额","A信息","B金额","B信息","店名","备注1","备注2","备注3"};
-
         //调用Excel导出工具类
-        this.importDataService.export(response,importDataService.listAll(userId),arr);
+        this.importDataService.export(response,null,arr);
+    }
+    @ApiOperation("导出数据")
+    @RequestMapping(value = "/exportData", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE,method = RequestMethod.POST)
+    public void exportData(HttpServletRequest request, HttpServletResponse response, @RequestBody ImportDateParam importDateParam) {
+        Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
+        //调用Excel导出工具类
+        this.importDataService.export(response,this.importDataService.list(userId, importDateParam, 1, Integer.MAX_VALUE,null,null),arr);
     }
     /**
      * excel导入

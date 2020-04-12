@@ -142,42 +142,42 @@ public class ImportDataExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(Integer value) {
+        public Criteria andIdEqualTo(Long value) {
             addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(Integer value) {
+        public Criteria andIdNotEqualTo(Long value) {
             addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(Integer value) {
+        public Criteria andIdGreaterThan(Long value) {
             addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIdGreaterThanOrEqualTo(Long value) {
             addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(Integer value) {
+        public Criteria andIdLessThan(Long value) {
             addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(Integer value) {
+        public Criteria andIdLessThanOrEqualTo(Long value) {
             addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<Integer> values) {
+        public Criteria andIdIn(List<Long> values) {
             addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<Integer> values) {
+        public Criteria andIdNotIn(List<Long> values) {
             addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
@@ -413,7 +413,7 @@ public class ImportDataExample {
         }
 
         public Criteria andWangwangIdLike(String value) {
-            addCriterion("wangwang_id like", value, "wangwangId");
+            addCriterion("wangwang_id like", "%"+value+"%", "wangwangId");
             return (Criteria) this;
         }
 
@@ -441,7 +441,26 @@ public class ImportDataExample {
             addCriterion("wangwang_id not between", value1, value2, "wangwangId");
             return (Criteria) this;
         }
-
+        public Criteria andAInfoLike(String value) {
+            addCriterion("a_info like", "%"+value+"%", "aInfo");
+            return (Criteria) this;
+        }
+        public Criteria andBInfoLike(String value) {
+            addCriterion("b_info like", "%"+value+"%", "bInfo");
+            return (Criteria) this;
+        }
+        public Criteria andRemark1(String value) {
+            addCriterion("remark_1 like", "%"+value+"%", "remark1");
+            return (Criteria) this;
+        }
+        public Criteria andRemark2(String value) {
+            addCriterion("remark_2 like", "%"+value+"%", "remark2");
+            return (Criteria) this;
+        }
+        public Criteria andRemark3(String value) {
+            addCriterion("remark_3 like", "%"+value+"%", "remark3");
+            return (Criteria) this;
+        }
         public Criteria andAPriceIsNull() {
             addCriterion("a_price is null");
             return (Criteria) this;
@@ -543,7 +562,7 @@ public class ImportDataExample {
         }
 
         public Criteria andStoreNameLike(String value) {
-            addCriterion("store_name like", value, "storeName");
+            addCriterion("store_name like", "%"+value+"%", "storeName");
             return (Criteria) this;
         }
 

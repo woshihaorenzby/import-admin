@@ -6,16 +6,16 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class ImportData implements Serializable {
-    @ApiModelProperty(value = "主键")
+    @ApiModelProperty(value = "编号")
     private Integer id;
 
-    @ApiModelProperty(value = "添加时间")
+    @ApiModelProperty(value = "日期")
     private Date addTime;
 
     @ApiModelProperty(value = "导入的月份，用户自定义")
     private Integer importMonth;
 
-    @ApiModelProperty(value = "日期")
+    @ApiModelProperty(value = "添加日期")
     private Integer importDay;
 
     @ApiModelProperty(value = "旺旺号")
@@ -47,8 +47,6 @@ public class ImportData implements Serializable {
 
     @ApiModelProperty(value = "备注3")
     private String remark3;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -161,7 +159,30 @@ public class ImportData implements Serializable {
     public void setRemark3(String remark3) {
         this.remark3 = remark3;
     }
-
+    public String isBInfo(){
+        return this.bInfo;
+    }
+    public String isAInfo(){
+        return this.aInfo;
+    }
+    public BigDecimal isBPrice(){
+        return this.bPrice;
+    }
+    public BigDecimal isAPrice(){
+        return this.aPrice;
+    }
+    public void setBInfo(String bInfo){
+        this.bInfo = bInfo;
+    }
+    public void setAInfo(String aInfo){
+        this.aInfo = aInfo;
+    }
+    public void setBPrice(BigDecimal bPrice){
+        this.bPrice = bPrice;
+    }
+    public void setAPrice(BigDecimal aPrice){
+        this.aPrice = aPrice;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -182,7 +203,6 @@ public class ImportData implements Serializable {
         sb.append(", remark1=").append(remark1);
         sb.append(", remark2=").append(remark2);
         sb.append(", remark3=").append(remark3);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

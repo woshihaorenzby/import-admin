@@ -3,15 +3,13 @@ package com.macro.mall.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.macro.mall.common.api.ClassUtil;
-import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.dto.ImportDateParam;
 import com.macro.mall.mapper.ImportDataMapper;
 import com.macro.mall.mapper.ImportFieldMapper;
 import com.macro.mall.model.ImportData;
 import com.macro.mall.model.ImportDataExample;
 import com.macro.mall.model.ImportField;
-import com.macro.mall.model.UmsMenuExample;
 import com.macro.mall.service.ImportDataService;
-import io.swagger.models.auth.In;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -24,7 +22,6 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletResponse;
 import java.beans.IntrospectionException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -45,11 +42,58 @@ public class ImportDataServiceImpl implements ImportDataService {
     }
 
     @Override
-    public List<ImportData> list(Long userId, String keyword, Integer pageNum, Integer pageSize) {
+    public List<ImportData> list(Long userId, ImportDateParam importDateParam, Integer pageNum, Integer pageSize,String fieldName,String sortingType) {
         PageHelper.startPage(pageNum, pageSize);
         ImportDataExample example = new ImportDataExample();
-        example.setOrderByClause("addTime desc");
-        example.createCriteria();
+        if(fieldName!=null&&sortingType!=null&&!"null".equals(fieldName)&&!"null".equals(sortingType)){
+            if(fieldName.equals("aPrice")){
+                fieldName = "a_price";
+            }
+            if(fieldName.equals("bPrice")){
+                fieldName = "b_price";
+            }
+            example.setOrderByClause(fieldName+" "+ sortingType);
+        }else {
+            example.setOrderByClause(" addTime desc");
+        }
+        ImportDataExample.Criteria criteria = example.createCriteria();
+        if(StringUtils.isNotEmpty(importDateParam.getIds())) {
+            String ids = importDateParam.getIds();
+            String[] split = ids.split(",");
+            List<Long> _ids = new ArrayList<>();
+            for (String id : split) {
+                _ids.add(Long.valueOf(id));
+            }
+            criteria.andIdIn(_ids);
+        }else{
+            if(StringUtils.isNotEmpty(importDateParam.getInfo1())){
+                criteria.andAInfoLike(importDateParam.getInfo1());
+            }
+            if(StringUtils.isNotEmpty(importDateParam.getWangwangId())){
+                criteria.andWangwangIdLike(importDateParam.getWangwangId());
+            }
+            if(StringUtils.isNotEmpty(importDateParam.getInfo2())){
+                criteria.andBInfoLike(importDateParam.getInfo2());
+            }
+            if(StringUtils.isNotEmpty(importDateParam.getStoreName())){
+                criteria.andStoreNameLike(importDateParam.getStoreName());
+            }
+            if(StringUtils.isNotEmpty(importDateParam.getRemark1())){
+                criteria.andRemark1(importDateParam.getRemark1());
+            }
+            if(StringUtils.isNotEmpty(importDateParam.getRemark2())){
+                criteria.andRemark2(importDateParam.getRemark2());
+            }
+            if(StringUtils.isNotEmpty(importDateParam.getRemark3())){
+                criteria.andRemark3(importDateParam.getRemark3());
+            }
+            if(importDateParam.getStartDate()!=null){
+                criteria.andAddtimeGreaterThanOrEqualTo(importDateParam.getStartDate());
+            }
+            if(importDateParam.getEndDate()!=null){
+                criteria.andAddtimeLessThanOrEqualTo(importDateParam.getEndDate());
+            }
+        }
         List<ImportData> list = this.importDataMapper.selectByExampleWithBLOBs(example);
         ImportField field = this.importFieldMapper.getFieldFillterByUserId(userId);
         if(field==null){
@@ -154,7 +198,10 @@ public class ImportDataServiceImpl implements ImportDataService {
                     cell.setCellType(CellType.STRING);
                     Field field = apiModelPropertyField.get(tableAttributeName[j]);
                     try {
-                        Object value = ClassUtil.getValueByField(field,targetObj);
+                        Object value = "";
+                        if(field!=null){
+                            value= ClassUtil.getValueByField(field,targetObj);
+                        }
                         cell.setCellValue(transCellType(value));
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
