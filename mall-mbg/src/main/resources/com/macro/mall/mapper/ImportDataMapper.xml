@@ -395,9 +395,14 @@
       import_day = #{importDay,jdbcType=INTEGER},
       wangwang_id = #{wangwangId,jdbcType=VARCHAR},
       a_price = #{aPrice,jdbcType=DECIMAL},
+      a_info = #{aInfo,jdbcType=DECIMAL},
       store_name = #{storeName,jdbcType=VARCHAR},
       b_price = #{bPrice,jdbcType=DECIMAL},
-      commission = #{commission,jdbcType=DECIMAL}
+      b_info = #{bInfo,jdbcType=DECIMAL},
+      commission = #{commission,jdbcType=DECIMAL},
+      remark1 = #{remark1,jdbcType=LONGVARCHAR},
+      remark2 = #{remark2,jdbcType=LONGVARCHAR},
+      remark3 = #{remark3,jdbcType=LONGVARCHAR},
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

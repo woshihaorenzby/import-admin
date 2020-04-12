@@ -21,4 +21,6 @@ public interface ImportFieldMapper {
     int updateByExample(@Param("record") ImportField record, @Param("example") ImportFieldExample example);
 
     List<ImportField> listAllByRoleId(ImportField importField);
+
+    ImportField getFieldFillterByUserId(@Param("userId")Long userId);
 }

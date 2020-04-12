@@ -4,43 +4,43 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 public class ImportField implements Serializable {
-    private Integer id;
+    private Integer id =0;
 
     @ApiModelProperty(value = "导入月")
-    private Integer importMonth;
+    private Integer importMonth =0;
 
     @ApiModelProperty(value = "导入日/月")
-    private Integer importDay;
+    private Integer importDay =0;
 
     @ApiModelProperty(value = "A信息")
-    private Integer aInfo;
+    private Integer aInfo =0;
 
     @ApiModelProperty(value = "旺旺")
-    private Integer wangwangId;
+    private Integer wangwangId =0;
 
     @ApiModelProperty(value = "A金额")
-    private Integer aPrice;
+    private Integer aPrice = 0;
 
-        @ApiModelProperty(value = "店铺名称")
-    private Integer storeName;
+    @ApiModelProperty(value = "店铺名称")
+    private Integer storeName =0;
 
     @ApiModelProperty(value = "B金额")
-    private Integer bPrice;
+    private Integer bPrice =0;
 
     @ApiModelProperty(value = "佣金")
-    private Integer commission;
+    private Integer commission =0;
 
     @ApiModelProperty(value = "B信息")
-    private Integer bInfo;
+    private Integer bInfo =0;
 
     @ApiModelProperty(value = "备注1")
-    private Integer remark1;
+    private Integer remark1 =0;
 
     @ApiModelProperty(value = "备注2")
-    private Integer remark2;
+    private Integer remark2 =0;
 
     @ApiModelProperty(value = "备注3")
-    private Integer remark3;
+    private Integer remark3 =0;
 
     @ApiModelProperty(value = "角色id")
     private Long roleId;

@@ -5,10 +5,14 @@ import com.github.pagehelper.PageHelper;
 import com.macro.mall.common.api.ClassUtil;
 import com.macro.mall.common.api.CommonResult;
 import com.macro.mall.mapper.ImportDataMapper;
+import com.macro.mall.mapper.ImportFieldMapper;
 import com.macro.mall.model.ImportData;
 import com.macro.mall.model.ImportDataExample;
+import com.macro.mall.model.ImportField;
 import com.macro.mall.model.UmsMenuExample;
 import com.macro.mall.service.ImportDataService;
+import io.swagger.models.auth.In;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -16,7 +20,6 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.beans.IntrospectionException;
@@ -34,6 +37,8 @@ import java.util.*;
 public class ImportDataServiceImpl implements ImportDataService {
     @Autowired
     private ImportDataMapper importDataMapper;
+    @Autowired
+    private ImportFieldMapper importFieldMapper;
     @Override
     public List<ImportData> listAll(Long userId) {
         return null;
@@ -45,7 +50,49 @@ public class ImportDataServiceImpl implements ImportDataService {
         ImportDataExample example = new ImportDataExample();
         example.setOrderByClause("addTime desc");
         example.createCriteria();
-        return this.importDataMapper.selectByExampleWithBLOBs(example);
+        List<ImportData> list = this.importDataMapper.selectByExampleWithBLOBs(example);
+        ImportField field = this.importFieldMapper.getFieldFillterByUserId(userId);
+        if(field==null){
+            field = new ImportField();
+        }
+        if(list!=null&&!list.isEmpty()){
+            for (ImportData a: list) {
+                if(field.getAInfo()==0){
+                    a.setaInfo("*");
+                }
+                if(field.getAPrice()==0){
+                    a.setaPrice(new BigDecimal(-1));
+                }
+                if(field.getBInfo()==0){
+                    a.setbInfo("*");
+                }
+                if(field.getBPrice()==0){
+                    a.setaPrice(new BigDecimal(-1));
+                }
+                if(field.getCommission()==0){
+                    a.setCommission(new BigDecimal(-1));
+                }
+                if(field.getImportDay()==0){
+                    a.setAddTime(null);
+                }
+                if(field.getRemark1()==0){
+                    a.setRemark1("*");
+                }
+                if(field.getRemark2()==0){
+                    a.setRemark2("*");
+                }
+                if(field.getRemark3()==0){
+                    a.setRemark3("*");
+                }
+                if(field.getStoreName()==0){
+                    a.setStoreName("*");
+                }
+                if(field.getWangwangId()==0){
+                    a.setWangwangId("*");
+                }
+            }
+        }
+        return list;
     }
     @Override
     public List<ImportData> selectByExampleWithBLOBs(ImportDataExample example){
@@ -151,7 +198,7 @@ public class ImportDataServiceImpl implements ImportDataService {
                     String date = String.valueOf(map.get(ar.get(0)));
                     Date parse = new Date();
                     try {
-                        if(!StringUtils.isEmpty(date)){
+                        if(StringUtils.isNotEmpty(date)){
                             parse = sdf.parse(date);
                         }
                     } catch (ParseException e) {
@@ -205,6 +252,23 @@ public class ImportDataServiceImpl implements ImportDataService {
         return i;
     }
 
+    @Override
+    public Integer doDeleteByIds(String ids) {
+        Integer i = 0;
+        if(StringUtils.isNotEmpty(ids)){
+            String[] split = ids.split(",");
+            for (String id: split) {
+                this.delete(Long.valueOf(id));
+            }
+        }
+        return i;
+    }
+
+    @Override
+    public ImportData getImportData(Long id) {
+        return this.importDataMapper.selectByPrimaryKey(id.intValue());
+    }
+
     private static String transCellType(Object value){
         String str = null;
         if (value instanceof Date){
@@ -228,16 +292,28 @@ public class ImportDataServiceImpl implements ImportDataService {
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        this.importDataMapper.deleteByPrimaryKey(id.intValue());
+        return true;
     }
 
     @Override
-    public boolean update(ImportData importData) {
+    public boolean update(Long id, ImportData importData) {
+        int i = this.importDataMapper.updateByPrimaryKeyWithBLOBs(importData);
+        if (i == 0)
+            return false;
+        else if (i == 1)
+            return true;
         return false;
     }
 
     @Override
     public boolean save(ImportData importData) {
+        importData.setAddTime(new Date());
+        int insert = this.importDataMapper.insert(importData);
+        if (insert == 0)
+            return false;
+        else if (insert == 1)
+            return true;
         return false;
     }
 }

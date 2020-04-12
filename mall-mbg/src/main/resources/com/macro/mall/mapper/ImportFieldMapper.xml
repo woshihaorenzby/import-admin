@@ -208,7 +208,18 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-    <select id="listAllByRoleId" resultType="com.macro.mall.model.ImportField" parameterType="com.macro.mall.model.ImportField">
+  <select id="getFieldFillterByUserId" resultType="com.macro.mall.model.ImportField" parameterType="java.lang.Long">
+    select
+    i.id as id, i.import_month as importMonth, i.import_day as importDay, i.a_info as aInfo, i.wangwang_id as wangwangId, i.a_price as aPrice , i.store_name as storeName, i.b_price as bPrice,
+    i.commission as commission, i.b_info as bInfo, i.remark_1 as remark1, i.remark_2 as remark2, i.remark_3 as remark3, i.role_id as roleId
+    from import_field as i,ums_admin_role_relation  as yarr
+    where i.role_id= yarr.role_id
+    <if test="userId!=null">
+      and yarr.admin_id =#{userId}
+    </if>
+
+  </select>
+  <select id="listAllByRoleId" resultType="com.macro.mall.model.ImportField" parameterType="com.macro.mall.model.ImportField">
       select
       <include refid="Base_Column_List" />
       from import_field

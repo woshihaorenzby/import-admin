@@ -44,7 +44,7 @@ public interface ImportDataService {
      * @param importData
      * @return
      */
-    boolean update(ImportData importData);
+    boolean update(Long id,ImportData importData);
     /**
      * 增加
      * @param importData
@@ -62,4 +62,20 @@ public interface ImportDataService {
      * @return
      */
     Integer upload(String excelArr, String excelData);
+
+    /**
+     * 通过ids进行删除
+     *
+     * @param ids
+     * @return
+     */
+    Integer doDeleteByIds(String ids);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    ImportData getImportData(Long id);
+
 }
