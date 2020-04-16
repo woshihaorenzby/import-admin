@@ -32,8 +32,7 @@ public class ImportDataController {
     private ImportDataService importDataService;
     @Autowired
     private UmsAdminService umsAdminService;
-
-    private final static String[] arr = new String[]{"日期","旺旺号","佣金","A金额","A信息","B金额","B信息","店名","备注1","备注2","备注3"};
+    private final static String[] arr = new String[]{"年月日","编号","A信息","旺旺号","A金额","店名","B金额","C佣金","B信息","创建人","备注1","备注2","备注3"};
 
     @ApiOperation("获取所有导入的数据")
     @RequestMapping(value = "/listAll/{pageNum}/{pageSize}/{fieldName}/{sortingType}", method = RequestMethod.POST)

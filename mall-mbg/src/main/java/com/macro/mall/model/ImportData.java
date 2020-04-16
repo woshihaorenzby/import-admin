@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class ImportData implements Serializable {
-    @ApiModelProperty(value = "编号")
+    @ApiModelProperty(value = "主键")
     private Integer id;
 
-    @ApiModelProperty(value = "日期")
+    @ApiModelProperty(value = "年月日")
     private Date addTime;
 
     @ApiModelProperty(value = "导入的月份，用户自定义")
@@ -30,8 +30,26 @@ public class ImportData implements Serializable {
     @ApiModelProperty(value = "B金额")
     private BigDecimal bPrice;
 
-    @ApiModelProperty(value = "佣金")
+    @ApiModelProperty(value = "C佣金")
     private BigDecimal commission;
+
+    @ApiModelProperty(value = "aprice的字符串类型")
+    private String price1str;
+
+    @ApiModelProperty(value = "bprice的字符串类型")
+    private String price2str;
+
+    @ApiModelProperty(value = "创建该条数据的用户id")
+    private Integer createUserId;
+
+    @ApiModelProperty(value = "创建人")
+    private String createUsername;
+
+    @ApiModelProperty(value = "编号")
+    private String code;
+
+    @ApiModelProperty(value = "C佣金的字符串类型")
+    private String commissionStr;
 
     @ApiModelProperty(value = "A信息")
     private String aInfo;
@@ -120,6 +138,60 @@ public class ImportData implements Serializable {
         this.commission = commission;
     }
 
+    public String getPrice1str() {
+        return price1str;
+    }
+
+    public void setPrice1str(String price1str) {
+        this.price1str = price1str;
+    }
+
+    public String getPrice2str() {
+        return price2str;
+    }
+
+    public void setPrice2str(String price2str) {
+        this.price2str = price2str;
+    }
+
+    public Integer getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Integer createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    public String getCreateUsername() {
+        return createUsername;
+    }
+
+    public void setCreateUsername(String createUsername) {
+        this.createUsername = createUsername;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCommissionStr() {
+        if(this.commission!=null){
+            return commission.toString();
+        }
+        return "";
+    }
+
+    public void setCommissionStr(String commissionStr) {
+        if(this.commission!=null){
+            this.commissionStr =this.commission.toString();
+        }
+        this.commissionStr = "";
+    }
+
     public String getaInfo() {
         return aInfo;
     }
@@ -198,6 +270,12 @@ public class ImportData implements Serializable {
         sb.append(", storeName=").append(storeName);
         sb.append(", bPrice=").append(bPrice);
         sb.append(", commission=").append(commission);
+        sb.append(", price1str=").append(price1str);
+        sb.append(", price2str=").append(price2str);
+        sb.append(", createUserId=").append(createUserId);
+        sb.append(", createUsername=").append(createUsername);
+        sb.append(", code=").append(code);
+        sb.append(", commissionStr=").append(commissionStr);
         sb.append(", aInfo=").append(aInfo);
         sb.append(", bInfo=").append(bInfo);
         sb.append(", remark1=").append(remark1);
