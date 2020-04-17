@@ -62,7 +62,7 @@ public interface ImportDataService {
      * @param excelData
      * @return
      */
-    Integer upload(String excelArr, String excelData);
+    Integer upload(String excelArr, String excelData,String userName,Long userId);
 
     /**
      * 通过ids进行删除

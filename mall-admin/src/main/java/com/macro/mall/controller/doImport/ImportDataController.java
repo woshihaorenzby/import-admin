@@ -33,6 +33,7 @@ public class ImportDataController {
     @Autowired
     private UmsAdminService umsAdminService;
     private final static String[] arr = new String[]{"年月日","编号","A信息","旺旺号","A金额","店名","B金额","C佣金","B信息","创建人","备注1","备注2","备注3"};
+    private final static String[] template_arr = new String[]{"年月日","编号","A信息","旺旺号","A金额","店名","B金额","C佣金","B信息","备注1","备注2","备注3"};
 
     @ApiOperation("获取所有导入的数据")
     @RequestMapping(value = "/listAll/{pageNum}/{pageSize}/{fieldName}/{sortingType}", method = RequestMethod.POST)
@@ -48,7 +49,7 @@ public class ImportDataController {
         Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
 
         //调用Excel导出工具类
-        this.importDataService.export(response,null,arr);
+        this.importDataService.export(response,null,template_arr);
     }
     @ApiOperation("导出数据")
     @RequestMapping(value = "/exportData", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE,method = RequestMethod.POST)
@@ -67,8 +68,10 @@ public class ImportDataController {
     @ApiOperation("导入数据")
     @RequestMapping(value = "/do_import" ,method = RequestMethod.POST )
     @ResponseBody
-    public CommonResult upload( String excelArr,  String excelData,  Long onBankId) {
-        Integer i = this.importDataService.upload(excelArr,excelData);
+    public CommonResult upload(HttpServletRequest request,  String excelArr,  String excelData) {
+        String userName = String.valueOf(request.getAttribute("userName"));
+        Long userId = this.umsAdminService.getAdminByUsername(userName).getId();
+        Integer i = this.importDataService.upload(excelArr,excelData,userName,userId);
         return CommonResult.success(i);
     }
 

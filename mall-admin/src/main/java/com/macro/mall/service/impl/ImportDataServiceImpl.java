@@ -231,7 +231,7 @@ public class ImportDataServiceImpl implements ImportDataService {
     }
 
     @Override
-    public Integer upload(String excelArr, String excelData) {
+    public Integer upload(String excelArr, String excelData,String userName,Long userId) {
         Integer i= 0;
         List<String> list = JSON.parseObject(excelArr, List.class);
         Map<String,Object> map = JSON.parseObject(excelData, Map.class);
@@ -253,6 +253,15 @@ public class ImportDataServiceImpl implements ImportDataService {
                     }
                     imd.setAddTime(parse);
                 }
+//                "年月日","编号","A信息","旺旺号","A金额","店名","B金额","C佣金","B信息","备注1","备注2","备注3"
+                if(map.get(ar.get(1))!=null){
+                    String code = String.valueOf(map.get(ar.get(1)));
+                    imd.setWangwangId(code);
+                }
+                if(map.get(ar.get(4))!=null){
+                    String aInfo = String.valueOf(map.get(ar.get(4)));
+                    imd.setaInfo(aInfo);
+                }
                 if(map.get(ar.get(1))!=null){
                     String wangwangId = String.valueOf(map.get(ar.get(1)));
                     imd.setWangwangId(wangwangId);
@@ -261,14 +270,8 @@ public class ImportDataServiceImpl implements ImportDataService {
                     BigDecimal commission =new BigDecimal(String.valueOf(map.get(ar.get(2))));
                     imd.setCommission(commission);
                 }
-                if(map.get(ar.get(3))!=null){
-                    BigDecimal aPrice = new BigDecimal(String.valueOf(map.get(ar.get(3))));
-                    imd.setaPrice(aPrice);
-                }
-                if(map.get(ar.get(4))!=null){
-                    String aInfo = String.valueOf(map.get(ar.get(4)));
-                    imd.setaInfo(aInfo);
-                }
+
+
                 if(map.get(ar.get(5))!=null){
                     BigDecimal bPrice = new BigDecimal(String.valueOf(map.get(ar.get(5))));
                     imd.setbPrice(bPrice);
