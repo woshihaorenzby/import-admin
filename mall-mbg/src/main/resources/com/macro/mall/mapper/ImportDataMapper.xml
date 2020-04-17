@@ -204,7 +204,7 @@
                 commission,
             </if>
           <if test="aPrice!=null">
-            price1str = #{CONCAT(aPrice,''),jdbcType=VARCHAR},
+            price1str = #{aPrice,''),jdbcType=VARCHAR},
           </if>
           <if test="bPrice!=null">
             price2str = #{CONCAT(bPrice,''),jdbcType=VARCHAR}
@@ -506,13 +506,13 @@
         b_price = #{bPrice,jdbcType=DECIMAL},
         commission = #{commission,jdbcType=DECIMAL},
         <if test="aPrice!=null">
-            price1str = #{CONCAT(aPrice,''),jdbcType=VARCHAR},
+            price1str = #{aPrice,jdbcType=VARCHAR},
         </if>
-        <if test="b_price!=null">
-            price2str = #{CONCAT(b_price,''),jdbcType=VARCHAR}
+        <if test="bPrice!=null">
+            price2str = #{bPrice,jdbcType=VARCHAR},
         </if>
         <if test="commission!=null">
-            commission_str = #{CONCAT(commission,''),jdbcType=VARCHAR}
+            commission_str = #{commission,jdbcType=VARCHAR},
         </if>
         create_user_id = #{createUserId,jdbcType=INTEGER},
         create_username = #{createUsername,jdbcType=VARCHAR},

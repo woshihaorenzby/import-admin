@@ -256,46 +256,50 @@ public class ImportDataServiceImpl implements ImportDataService {
 //                "年月日","编号","A信息","旺旺号","A金额","店名","B金额","C佣金","B信息","备注1","备注2","备注3"
                 if(map.get(ar.get(1))!=null){
                     String code = String.valueOf(map.get(ar.get(1)));
-                    imd.setWangwangId(code);
-                }
-                if(map.get(ar.get(4))!=null){
-                    String aInfo = String.valueOf(map.get(ar.get(4)));
-                    imd.setaInfo(aInfo);
-                }
-                if(map.get(ar.get(1))!=null){
-                    String wangwangId = String.valueOf(map.get(ar.get(1)));
-                    imd.setWangwangId(wangwangId);
+                    imd.setCode(code);
                 }
                 if(map.get(ar.get(2))!=null){
-                    BigDecimal commission =new BigDecimal(String.valueOf(map.get(ar.get(2))));
-                    imd.setCommission(commission);
+                    String aInfo = String.valueOf(map.get(ar.get(2)));
+                    imd.setaInfo(aInfo);
                 }
-
-
+                if(map.get(ar.get(3))!=null){
+                    String wangwangId = String.valueOf(map.get(ar.get(3)));
+                    imd.setWangwangId(wangwangId);
+                }
+                if(map.get(ar.get(4))!=null){
+                    BigDecimal aPrice = new BigDecimal(String.valueOf(map.get(ar.get(4))));
+                    imd.setaPrice(aPrice);
+                }
                 if(map.get(ar.get(5))!=null){
-                    BigDecimal bPrice = new BigDecimal(String.valueOf(map.get(ar.get(5))));
-                    imd.setbPrice(bPrice);
-                }
-                if(map.get(ar.get(6))!=null){
-                    String bInfo = String.valueOf(map.get(ar.get(6)));
-                    imd.setbInfo(bInfo);
-                }
-                if(map.get(ar.get(7))!=null){
-                    String storeName = String.valueOf(map.get(ar.get(7)));
+                    String storeName = String.valueOf(map.get(ar.get(5)));
                     imd.setStoreName(storeName);
                 }
+                if(map.get(ar.get(6))!=null){
+                    BigDecimal bPrice = new BigDecimal(String.valueOf(map.get(ar.get(6))));
+                    imd.setbPrice(bPrice);
+                }
+                if(map.get(ar.get(7))!=null){
+                    BigDecimal commission =new BigDecimal(String.valueOf(map.get(ar.get(7))));
+                    imd.setCommission(commission);
+                }
                 if(map.get(ar.get(8))!=null){
-                    String remark1 = String.valueOf(map.get(ar.get(8)));
-                    imd.setRemark1(remark1);
+                    String bInfo = String.valueOf(map.get(ar.get(8)));
+                    imd.setbInfo(bInfo);
                 }
                 if(map.get(ar.get(9))!=null){
-                    String remark2 = String.valueOf(map.get(ar.get(9)));
-                    imd.setRemark2(remark2);
+                    String remark1 = String.valueOf(map.get(ar.get(9)));
+                    imd.setRemark1(remark1);
                 }
                 if(map.get(ar.get(10))!=null){
-                    String remark3 = String.valueOf(map.get(ar.get(10)));
+                    String remark2 = String.valueOf(map.get(ar.get(10)));
+                    imd.setRemark2(remark2);
+                }
+                if(map.get(ar.get(11))!=null){
+                    String remark3 = String.valueOf(map.get(ar.get(11)));
                     imd.setRemark3(remark3);
                 }
+                imd.setCreateUserId(userId);
+                imd.setCreateUsername(userName);
                 this.importDataMapper.insert(imd);
             }
         }

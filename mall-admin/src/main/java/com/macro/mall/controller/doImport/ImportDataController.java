@@ -130,7 +130,11 @@ public class ImportDataController {
     @ApiOperation("保存单个数据")
     @RequestMapping(value = "/createImportData" ,method = RequestMethod.POST )
     @ResponseBody
-    public CommonResult<ImportData> createImportData( @Validated @RequestBody ImportData importData) {
+    public CommonResult<ImportData> createImportData(HttpServletRequest request, @Validated @RequestBody ImportData importData) {
+        String userName = String.valueOf(request.getAttribute("userName"));
+        Long userId = this.umsAdminService.getAdminByUsername(userName).getId();
+        importData.setCreateUsername(userName);
+        importData.setCreateUserId(userId);
         boolean save = this.importDataService.save(importData);
         if(save)
             return CommonResult.success(importData);

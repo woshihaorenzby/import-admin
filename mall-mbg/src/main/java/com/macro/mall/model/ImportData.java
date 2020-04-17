@@ -28,7 +28,7 @@ public class ImportData implements Serializable {
     private String storeName;
 
     @ApiModelProperty(value = "B金额")
-    private BigDecimal bPrice;
+    private BigDecimal  bPrice;
 
     @ApiModelProperty(value = "C佣金")
     private BigDecimal commission;
@@ -40,7 +40,7 @@ public class ImportData implements Serializable {
     private String price2str;
 
     @ApiModelProperty(value = "创建该条数据的用户id")
-    private Integer createUserId;
+    private Long createUserId;
 
     @ApiModelProperty(value = "创建人")
     private String createUsername;
@@ -111,6 +111,11 @@ public class ImportData implements Serializable {
     }
 
     public void setaPrice(BigDecimal aPrice) {
+        if(aPrice!=null){
+            this.price1str = aPrice.toString();
+        }else{
+            this.price1str = "";
+        }
         this.aPrice = aPrice;
     }
 
@@ -127,6 +132,11 @@ public class ImportData implements Serializable {
     }
 
     public void setbPrice(BigDecimal bPrice) {
+        if(bPrice!=null){
+            this.price2str = bPrice.toString();
+        }else{
+            this.price2str = "";
+        }
         this.bPrice = bPrice;
     }
 
@@ -135,6 +145,11 @@ public class ImportData implements Serializable {
     }
 
     public void setCommission(BigDecimal commission) {
+        if(commission!=null){
+            this.commissionStr = commission.toString();
+        }else{
+            this.commissionStr = "";
+        }
         this.commission = commission;
     }
 
@@ -154,11 +169,11 @@ public class ImportData implements Serializable {
         this.price2str = price2str;
     }
 
-    public Integer getCreateUserId() {
+    public Long getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Integer createUserId) {
+    public void setCreateUserId(Long createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -179,17 +194,11 @@ public class ImportData implements Serializable {
     }
 
     public String getCommissionStr() {
-        if(this.commission!=null){
-            return commission.toString();
-        }
-        return "";
+        return commissionStr;
     }
 
     public void setCommissionStr(String commissionStr) {
-        if(this.commission!=null){
-            this.commissionStr =this.commission.toString();
-        }
-        this.commissionStr = "";
+        this.commissionStr = commissionStr;
     }
 
     public String getaInfo() {
