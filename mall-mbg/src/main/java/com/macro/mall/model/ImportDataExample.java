@@ -968,7 +968,7 @@ public class ImportDataExample {
         }
 
         public Criteria andCreateUsernameLike(String value) {
-            addCriterion("create_username like", value, "createUsername");
+            addCriterion("create_username like", "%"+value+"%", "createUsername");
             return (Criteria) this;
         }
 

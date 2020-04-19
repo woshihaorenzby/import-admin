@@ -93,6 +93,21 @@ public class ImportDataController {
         return CommonResult.success(i);
     }
     /**
+     * excel删除
+          * @param excelArr
+          * @param excelData
+          * @param onBankId
+          * @return
+     */
+    @ApiOperation("导入数据")
+    @RequestMapping(value = "/listAll/doDeleteHis" ,method = RequestMethod.GET )
+    @ResponseBody
+    public CommonResult<String> doDeleteHis(HttpServletRequest request,  @RequestParam(value = "ids") String ids) {
+        Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
+        String i = this.importDataService.doDeleteHis(ids,userId);
+        return CommonResult.success(i);
+    }
+    /**
      * excel获取单个数据
           * @param excelArr
           * @param excelData

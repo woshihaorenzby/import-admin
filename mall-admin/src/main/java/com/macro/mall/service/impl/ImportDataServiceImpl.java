@@ -95,6 +95,9 @@ public class ImportDataServiceImpl implements ImportDataService {
             if(StringUtils.isNotEmpty(importDateParam.getAnyColumn())){
                 criteria.andAnyColumn(importDateParam.getAnyColumn());
             }
+            if(StringUtils.isNotEmpty(importDateParam.getCreateUserName())){
+                criteria.andCreateUsernameLike(importDateParam.getCreateUserName());
+            }
             if(importDateParam.getStartDate()!=null){
                 criteria.andAddtimeGreaterThanOrEqualTo(importDateParam.getStartDate());
             }
@@ -414,5 +417,22 @@ public class ImportDataServiceImpl implements ImportDataService {
         }
         return true;
     }
-
+    public String doDeleteHis(String ids ,Long userId){
+        String _ids = "";
+        List<String> hasNotRemoveIds = new ArrayList<>();
+        ImportDateParam importDateParam = new ImportDateParam();
+        importDateParam.setIds(ids);
+        List<ImportData> list = this.list(userId, importDateParam, 1, Integer.MAX_VALUE, null, null);
+        for (ImportData data: list) {
+            if(data.getCreateUserId().equals(userId)){
+                this.delete(data.getId().longValue());
+            }else{
+                hasNotRemoveIds.add(String.valueOf(data.getId()));
+            }
+        }
+        if(hasNotRemoveIds!=null&&!hasNotRemoveIds.isEmpty()){
+            _ids = StringUtils.join(hasNotRemoveIds,",");
+        }
+        return _ids;
+    }
 }

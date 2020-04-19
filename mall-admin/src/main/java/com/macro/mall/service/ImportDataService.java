@@ -79,4 +79,5 @@ public interface ImportDataService {
      */
     ImportData getImportData(Long id);
 
+    String doDeleteHis(String ids ,Long userId);
 }

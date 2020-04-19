@@ -24,6 +24,7 @@ public class ImportDateParam {
     private String remark3;
     private String code;
     private String anyColumn;
+    private String createUserName;
 
     public String getIds() {
         return ids;
@@ -103,6 +104,14 @@ public class ImportDateParam {
 
     public void setRemark3(String remark3) {
         this.remark3 = remark3;
+    }
+
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
     }
 
     public String getCode() {
