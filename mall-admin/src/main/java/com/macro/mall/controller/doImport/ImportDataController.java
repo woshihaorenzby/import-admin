@@ -68,11 +68,14 @@ public class ImportDataController {
     @ApiOperation("导入数据")
     @RequestMapping(value = "/do_import" ,method = RequestMethod.POST )
     @ResponseBody
-    public CommonResult upload(HttpServletRequest request,  String excelArr,  String excelData) {
+    public CommonResult<List<String>> upload(HttpServletRequest request,  String excelArr,  String excelData) {
         String userName = String.valueOf(request.getAttribute("userName"));
         Long userId = this.umsAdminService.getAdminByUsername(userName).getId();
-        Integer i = this.importDataService.upload(excelArr,excelData,userName,userId);
-        return CommonResult.success(i);
+        List<String> upload = this.importDataService.upload(excelArr, excelData, userName, userId);
+        if(upload.isEmpty())
+            return CommonResult.success(upload);
+        else
+            return CommonResult.failed("导入失败",upload);
     }
 
     /**

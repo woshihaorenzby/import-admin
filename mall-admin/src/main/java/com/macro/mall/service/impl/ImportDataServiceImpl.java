@@ -29,6 +29,8 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class ImportDataServiceImpl implements ImportDataService {
@@ -86,6 +88,12 @@ public class ImportDataServiceImpl implements ImportDataService {
             }
             if(StringUtils.isNotEmpty(importDateParam.getRemark3())){
                 criteria.andRemark3(importDateParam.getRemark3());
+            }
+            if(StringUtils.isNotEmpty(importDateParam.getCode())){
+                criteria.andCodeLike(importDateParam.getCode());
+            }
+            if(StringUtils.isNotEmpty(importDateParam.getAnyColumn())){
+                criteria.andAnyColumn(importDateParam.getAnyColumn());
             }
             if(importDateParam.getStartDate()!=null){
                 criteria.andAddtimeGreaterThanOrEqualTo(importDateParam.getStartDate());
@@ -231,14 +239,17 @@ public class ImportDataServiceImpl implements ImportDataService {
     }
 
     @Override
-    public Integer upload(String excelArr, String excelData,String userName,Long userId) {
-        Integer i= 0;
+    public List<String> upload(String excelArr, String excelData,String userName,Long userId) {
         List<String> list = JSON.parseObject(excelArr, List.class);
         Map<String,Object> map = JSON.parseObject(excelData, Map.class);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<String> result = new ArrayList<>();
+        list.remove(0);
         if(list!=null&&!list.isEmpty()){
-            list.remove(0);
+            List<ImportData> l = new ArrayList<>();
+            int row = 2;
             for (String a: list) {
+                StringBuilder sb = new StringBuilder();
                 List<String> ar = JSON.parseObject(a, List.class);
                 ImportData imd = new ImportData();
                 if(map.get(ar.get(0))!=null){
@@ -267,20 +278,32 @@ public class ImportDataServiceImpl implements ImportDataService {
                     imd.setWangwangId(wangwangId);
                 }
                 if(map.get(ar.get(4))!=null){
-                    BigDecimal aPrice = new BigDecimal(String.valueOf(map.get(ar.get(4))));
-                    imd.setaPrice(aPrice);
+                    if(isNumeric(String.valueOf(map.get(ar.get(4))))) {
+                        BigDecimal aPrice = new BigDecimal(String.valueOf(map.get(ar.get(4))));
+                        imd.setaPrice(aPrice);
+                    }else {
+                        sb.append("A金额不是数值类型;");
+                    }
                 }
                 if(map.get(ar.get(5))!=null){
                     String storeName = String.valueOf(map.get(ar.get(5)));
                     imd.setStoreName(storeName);
                 }
                 if(map.get(ar.get(6))!=null){
-                    BigDecimal bPrice = new BigDecimal(String.valueOf(map.get(ar.get(6))));
-                    imd.setbPrice(bPrice);
+                    if(isNumeric(String.valueOf(map.get(ar.get(6))))){
+                        BigDecimal bPrice = new BigDecimal(String.valueOf(map.get(ar.get(6))));
+                        imd.setbPrice(bPrice);
+                    }else{
+                        sb.append("B金额不是数值类型;");
+                    }
                 }
                 if(map.get(ar.get(7))!=null){
-                    BigDecimal commission =new BigDecimal(String.valueOf(map.get(ar.get(7))));
-                    imd.setCommission(commission);
+                    if(isNumeric(String.valueOf(map.get(ar.get(7))))) {
+                        BigDecimal commission = new BigDecimal(String.valueOf(map.get(ar.get(7))));
+                        imd.setCommission(commission);
+                    }else{
+                        sb.append("C佣金不是数值类型;");
+                    }
                 }
                 if(map.get(ar.get(8))!=null){
                     String bInfo = String.valueOf(map.get(ar.get(8)));
@@ -300,10 +323,21 @@ public class ImportDataServiceImpl implements ImportDataService {
                 }
                 imd.setCreateUserId(userId);
                 imd.setCreateUsername(userName);
-                this.importDataMapper.insert(imd);
+                l.add(imd);
+                if(StringUtils.isNotEmpty(sb.toString())){
+                    result.add("excel表第"+row+"行:"+sb.toString());
+                }
+                row++;
             }
+            if(result==null||result.isEmpty()){
+                for (ImportData imd: l) {
+                    this.importDataMapper.insert(imd);
+                }
+            }
+        }else{
+            result.add("没有任何有效的数据，请检查excel表");
         }
-        return i;
+        return result;
     }
 
     @Override
@@ -370,4 +404,15 @@ public class ImportDataServiceImpl implements ImportDataService {
             return true;
         return false;
     }
+
+    public boolean isNumeric(String str) {
+        //Pattern pattern = Pattern.compile("-?[0-9]+.?[0-9]+");//这个有问题，一位的整数不能通过
+        Pattern pattern = Pattern.compile("^(\\-|\\+)?\\d+(\\.\\d+)?$");//这个是对的
+        Matcher isNum = pattern.matcher(str);
+        if (!isNum.matches()) {
+            return false;
+        }
+        return true;
+    }
+
 }

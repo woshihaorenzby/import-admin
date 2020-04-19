@@ -132,6 +132,21 @@ public class ImportDataExample {
             }
             addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
+        public Criteria andAnyColumn(String anyColumn) {
+            addCriterion("(a_info like '%"+anyColumn+"%' " +
+                    "or wangwang_id like '%"+anyColumn+"%' " +
+                    "or store_name like '%"+ anyColumn +"%' " +
+                    "or b_info like '%"+anyColumn +"%' " +
+                    "or remark_1 like '%"+anyColumn+"%' " +
+                    "or remark_2 like '%"+anyColumn+"%' " +
+                    "or remark_3 like '%"+anyColumn+"%' " +
+                    "or price1str like '%"+anyColumn+"%' " +
+                    "or price2str like '%"+anyColumn+"%' " +
+                    "or create_username like '%"+anyColumn+"%' " +
+                    "or code like '%"+anyColumn+"%' " +
+                    "or commission_str like '%"+anyColumn+"%' )");
+            return (Criteria) this;
+        }
 
         public Criteria andIdIsNull() {
             addCriterion("id is null");
@@ -1023,7 +1038,7 @@ public class ImportDataExample {
         }
 
         public Criteria andCodeLike(String value) {
-            addCriterion("code like", value, "code");
+            addCriterion("code like", "%"+value+"%", "code");
             return (Criteria) this;
         }
 
