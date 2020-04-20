@@ -2,8 +2,11 @@ package com.macro.mall.controller.doImport;
 
 import com.macro.mall.common.api.CommonPage;
 import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.dto.BudgetParam;
 import com.macro.mall.dto.ImportDateParam;
+import com.macro.mall.model.Budget;
 import com.macro.mall.model.ImportData;
+import com.macro.mall.service.BudgetService;
 import com.macro.mall.service.ImportDataService;
 import com.macro.mall.service.UmsAdminService;
 import io.swagger.annotations.Api;
@@ -19,11 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
-@Api(tags = "ImportDataController", description = "用户首页")
-@RequestMapping("/importData")
+@Api(tags = "BudgetController", description = "用户首页")
+@RequestMapping("/budget")
 public class BudgetController {
     @Autowired
-    private ImportDataService importDataService;
+    private BudgetService budgetService;
     @Autowired
     private UmsAdminService umsAdminService;
     private final static String[] arr = new String[]{"交易日期","店名","类别","金额相关备注","支出金额","收入金额","支出方名称","支出方账户","支出方备注","收入方名称","收入方账户","收入方备注","备注","核对人","创建人"};
@@ -32,23 +35,23 @@ public class BudgetController {
     @ApiOperation("获取所有导入的数据")
     @RequestMapping(value = "/listAll/{pageNum}/{pageSize}/{fieldName}/{sortingType}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult<CommonPage<ImportData>> listAll(HttpServletRequest request, @RequestBody ImportDateParam importDateParam, @PathVariable("pageNum")Integer pageNum, @PathVariable("pageSize")Integer pageSize, @PathVariable("fieldName")String fieldName, @PathVariable("sortingType")String sortingType) {
+    public CommonResult<CommonPage<Budget>> listAll(HttpServletRequest request, @RequestBody BudgetParam budgetParam, @PathVariable("pageNum")Integer pageNum, @PathVariable("pageSize")Integer pageSize, @PathVariable("fieldName")String fieldName, @PathVariable("sortingType")String sortingType) {
         Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
-        List<ImportData> list = this.importDataService.list(userId, importDateParam, pageNum, pageSize,fieldName,sortingType);
+        List<Budget> list = this.budgetService.list(userId, budgetParam, pageNum, pageSize, fieldName, sortingType);
         return CommonResult.success(CommonPage.restPage(list));
     }
     @ApiOperation("导出模板")
     @PostMapping(value = "/getTamplate", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public void getTamplate(HttpServletRequest request, HttpServletResponse response) {
         //调用Excel导出工具类
-        this.importDataService.export(response,null,template_arr);
+        this.budgetService.export(response,null,template_arr);
     }
     @ApiOperation("导出数据")
     @RequestMapping(value = "/exportData", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE,method = RequestMethod.POST)
-    public void exportData(HttpServletRequest request, HttpServletResponse response, @RequestBody ImportDateParam importDateParam) {
+    public void exportData(HttpServletRequest request, HttpServletResponse response, @RequestBody BudgetParam budgetParam) {
         Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
         //调用Excel导出工具类
-        this.importDataService.export(response,this.importDataService.list(userId, importDateParam, 1, Integer.MAX_VALUE,null,null),arr);
+        this.budgetService.export(response,this.budgetService.list(userId, budgetParam, 1, Integer.MAX_VALUE,null,null),arr);
     }
     /**
      * excel导入
@@ -63,7 +66,7 @@ public class BudgetController {
     public CommonResult<List<String>> upload(HttpServletRequest request,  String excelArr,  String excelData) {
         String userName = String.valueOf(request.getAttribute("userName"));
         Long userId = this.umsAdminService.getAdminByUsername(userName).getId();
-        List<String> upload = this.importDataService.upload(excelArr, excelData, userName, userId);
+        List<String> upload = this.budgetService.upload(excelArr, excelData, userName, userId);
         if(upload.isEmpty())
             return CommonResult.success(upload);
         else
@@ -81,7 +84,7 @@ public class BudgetController {
     @RequestMapping(value = "/doDeleteByIds" ,method = RequestMethod.GET )
     @ResponseBody
     public CommonResult doDeleteByIds( @RequestParam(value = "ids") String ids) {
-        Integer i = this.importDataService.doDeleteByIds(ids);
+        Integer i = this.budgetService.doDeleteByIds(ids);
         return CommonResult.success(i);
     }
     /**
@@ -96,7 +99,7 @@ public class BudgetController {
     @ResponseBody
     public CommonResult<String> doDeleteHis(HttpServletRequest request,  @RequestParam(value = "ids") String ids) {
         Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
-        String i = this.importDataService.doDeleteHis(ids,userId);
+        String i = this.budgetService.doDeleteHis(ids,userId);
         return CommonResult.success(i);
     }
     /**
@@ -109,9 +112,9 @@ public class BudgetController {
     @ApiOperation("获取单个数据")
     @RequestMapping(value = "/getImportData/{id}" ,method = RequestMethod.GET )
     @ResponseBody
-    public CommonResult<ImportData> getImportData(@PathVariable("id") Long id) {
-        ImportData importData = this.importDataService.getImportData(id);
-        return CommonResult.success(importData);
+    public CommonResult<Budget> getImportData(@PathVariable("id") Long id) {
+        Budget budget = this.budgetService.getBudget(id);
+        return CommonResult.success(budget);
     }
     /**
      * 更新单个数据
@@ -123,10 +126,10 @@ public class BudgetController {
     @ApiOperation("获取单个数据")
     @RequestMapping(value = "/updateImportData/{id}" ,method = RequestMethod.POST )
     @ResponseBody
-    public CommonResult<ImportData> updateImportData(@PathVariable("id") Long id, @Validated @RequestBody ImportData importData) {
-        boolean update = this.importDataService.update(id, importData);
+    public CommonResult<Budget> updateImportData(@PathVariable("id") Long id, @Validated @RequestBody Budget budget) {
+        boolean update = this.budgetService.update(id, budget);
         if(update)
-        return CommonResult.success(importData);
+        return CommonResult.success(budget);
         else
             return CommonResult.failed();
     }
@@ -140,14 +143,14 @@ public class BudgetController {
     @ApiOperation("保存单个数据")
     @RequestMapping(value = "/createImportData" ,method = RequestMethod.POST )
     @ResponseBody
-    public CommonResult<ImportData> createImportData(HttpServletRequest request, @Validated @RequestBody ImportData importData) {
+    public CommonResult<Budget> createImportData(HttpServletRequest request, @Validated @RequestBody Budget budget) {
         String userName = String.valueOf(request.getAttribute("userName"));
         Long userId = this.umsAdminService.getAdminByUsername(userName).getId();
-        importData.setCreateUsername(userName);
-        importData.setCreateUserId(userId);
-        boolean save = this.importDataService.save(importData);
+        budget.setCreateUsername(userName);
+        budget.setCreateUserId(userId.intValue());
+        boolean save = this.budgetService.save(budget);
         if(save)
-            return CommonResult.success(importData);
+            return CommonResult.success(budget);
         else
             return CommonResult.failed();
     }

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.BudgetFieldMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.BudgetField">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="tradeData" jdbcType="INTEGER" property="tradedata" />
+    <result column="storeName" jdbcType="INTEGER" property="storename" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="pay" jdbcType="INTEGER" property="pay" />
+    <result column="income" jdbcType="INTEGER" property="income" />
+    <result column="payName" jdbcType="INTEGER" property="payname" />
+    <result column="payAccount" jdbcType="INTEGER" property="payaccount" />
+    <result column="incomeName" jdbcType="INTEGER" property="incomename" />
+    <result column="incomeAccount" jdbcType="INTEGER" property="incomeaccount" />
+    <result column="checkName" jdbcType="INTEGER" property="checkname" />
+    <result column="createUserId" jdbcType="INTEGER" property="createuserid" />
+    <result column="createUsername" jdbcType="INTEGER" property="createusername" />
+    <result column="amountRemark" jdbcType="INTEGER" property="amountremark" />
+    <result column="payRemark" jdbcType="INTEGER" property="payremark" />
+    <result column="incomeRemark" jdbcType="INTEGER" property="incomeremark" />
+    <result column="remark" jdbcType="INTEGER" property="remark" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, tradeData, storeName, type, pay, income, payName, payAccount, incomeName, incomeAccount, 
+    checkName, createUserId, createUsername, amountRemark, payRemark, incomeRemark, remark, 
+    user_id
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.BudgetFieldExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from budget_field
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.BudgetFieldExample">
+    delete from budget_field
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.BudgetField">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into budget_field (tradeData, storeName, type, 
+      pay, income, payName, 
+      payAccount, incomeName, incomeAccount, 
+      checkName, createUserId, createUsername, 
+      amountRemark, payRemark, incomeRemark, 
+      remark, user_id)
+    values (#{tradedata,jdbcType=INTEGER}, #{storename,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{pay,jdbcType=INTEGER}, #{income,jdbcType=INTEGER}, #{payname,jdbcType=INTEGER}, 
+      #{payaccount,jdbcType=INTEGER}, #{incomename,jdbcType=INTEGER}, #{incomeaccount,jdbcType=INTEGER}, 
+      #{checkname,jdbcType=INTEGER}, #{createuserid,jdbcType=INTEGER}, #{createusername,jdbcType=INTEGER}, 
+      #{amountremark,jdbcType=INTEGER}, #{payremark,jdbcType=INTEGER}, #{incomeremark,jdbcType=INTEGER}, 
+      #{remark,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.BudgetField">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into budget_field
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tradedata != null">
+        tradeData,
+      </if>
+      <if test="storename != null">
+        storeName,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="pay != null">
+        pay,
+      </if>
+      <if test="income != null">
+        income,
+      </if>
+      <if test="payname != null">
+        payName,
+      </if>
+      <if test="payaccount != null">
+        payAccount,
+      </if>
+      <if test="incomename != null">
+        incomeName,
+      </if>
+      <if test="incomeaccount != null">
+        incomeAccount,
+      </if>
+      <if test="checkname != null">
+        checkName,
+      </if>
+      <if test="createuserid != null">
+        createUserId,
+      </if>
+      <if test="createusername != null">
+        createUsername,
+      </if>
+      <if test="amountremark != null">
+        amountRemark,
+      </if>
+      <if test="payremark != null">
+        payRemark,
+      </if>
+      <if test="incomeremark != null">
+        incomeRemark,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tradedata != null">
+        #{tradedata,jdbcType=INTEGER},
+      </if>
+      <if test="storename != null">
+        #{storename,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="pay != null">
+        #{pay,jdbcType=INTEGER},
+      </if>
+      <if test="income != null">
+        #{income,jdbcType=INTEGER},
+      </if>
+      <if test="payname != null">
+        #{payname,jdbcType=INTEGER},
+      </if>
+      <if test="payaccount != null">
+        #{payaccount,jdbcType=INTEGER},
+      </if>
+      <if test="incomename != null">
+        #{incomename,jdbcType=INTEGER},
+      </if>
+      <if test="incomeaccount != null">
+        #{incomeaccount,jdbcType=INTEGER},
+      </if>
+      <if test="checkname != null">
+        #{checkname,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null">
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createusername != null">
+        #{createusername,jdbcType=INTEGER},
+      </if>
+      <if test="amountremark != null">
+        #{amountremark,jdbcType=INTEGER},
+      </if>
+      <if test="payremark != null">
+        #{payremark,jdbcType=INTEGER},
+      </if>
+      <if test="incomeremark != null">
+        #{incomeremark,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.BudgetFieldExample" resultType="java.lang.Long">
+    select count(*) from budget_field
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="getFieldFillterByUserId" resultType="com.macro.mall.model.BudgetField" parameterType="java.lang.Long">
+    select bf.id, bf.tradeData, bf.storeName, bf.type, bf.pay, bf.income, bf.payName, bf.payAccount, bf.incomeName, bf.incomeAccount,
+    bf.checkName, bf.createUserId, bf.createUsername, bf.amountRemark, bf.payRemark, bf.incomeRemark, bf.remark,
+    bf.user_id
+    from budget_field as bf
+    <if test="userId!=null">
+      where bf.user_id = #{userId,jdbcType=INTEGER}
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update budget_field
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.tradedata != null">
+        tradeData = #{record.tradedata,jdbcType=INTEGER},
+      </if>
+      <if test="record.storename != null">
+        storeName = #{record.storename,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.pay != null">
+        pay = #{record.pay,jdbcType=INTEGER},
+      </if>
+      <if test="record.income != null">
+        income = #{record.income,jdbcType=INTEGER},
+      </if>
+      <if test="record.payname != null">
+        payName = #{record.payname,jdbcType=INTEGER},
+      </if>
+      <if test="record.payaccount != null">
+        payAccount = #{record.payaccount,jdbcType=INTEGER},
+      </if>
+      <if test="record.incomename != null">
+        incomeName = #{record.incomename,jdbcType=INTEGER},
+      </if>
+      <if test="record.incomeaccount != null">
+        incomeAccount = #{record.incomeaccount,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkname != null">
+        checkName = #{record.checkname,jdbcType=INTEGER},
+      </if>
+      <if test="record.createuserid != null">
+        createUserId = #{record.createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createusername != null">
+        createUsername = #{record.createusername,jdbcType=INTEGER},
+      </if>
+      <if test="record.amountremark != null">
+        amountRemark = #{record.amountremark,jdbcType=INTEGER},
+      </if>
+      <if test="record.payremark != null">
+        payRemark = #{record.payremark,jdbcType=INTEGER},
+      </if>
+      <if test="record.incomeremark != null">
+        incomeRemark = #{record.incomeremark,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update budget_field
+    set id = #{record.id,jdbcType=INTEGER},
+      tradeData = #{record.tradedata,jdbcType=INTEGER},
+      storeName = #{record.storename,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      pay = #{record.pay,jdbcType=INTEGER},
+      income = #{record.income,jdbcType=INTEGER},
+      payName = #{record.payname,jdbcType=INTEGER},
+      payAccount = #{record.payaccount,jdbcType=INTEGER},
+      incomeName = #{record.incomename,jdbcType=INTEGER},
+      incomeAccount = #{record.incomeaccount,jdbcType=INTEGER},
+      checkName = #{record.checkname,jdbcType=INTEGER},
+      createUserId = #{record.createuserid,jdbcType=INTEGER},
+      createUsername = #{record.createusername,jdbcType=INTEGER},
+      amountRemark = #{record.amountremark,jdbcType=INTEGER},
+      payRemark = #{record.payremark,jdbcType=INTEGER},
+      incomeRemark = #{record.incomeremark,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
