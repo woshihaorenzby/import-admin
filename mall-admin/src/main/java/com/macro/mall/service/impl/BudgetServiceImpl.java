@@ -106,59 +106,7 @@ public class BudgetServiceImpl implements BudgetService {
         }
         List<Budget> list = this.budgetMapper.selectByExampleWithBLOBs(example);
         BudgetField field = this.budgetFieldMapper.getFieldFillterByUserId(userId);
-        if(field==null){
-            field = new BudgetField();
-        }
-        if(list!=null&&!list.isEmpty()){
-            for (Budget a: list) {
-                if(field.getAmountremark()==0){
-                    a.setAmountRemark("*");
-                }
-                if(field.getCheckname()==0){
-                    a.setCheckName("*");
-                }
-                if(field.getCreateusername()==0){
-                    a.setCreateUsername("*");
-                }
-                if(field.getIncome()==0){
-                    a.setIncome("*");
-                }
-                if(field.getIncomeaccount()==0){
-                    a.setIncomeAccount("*");
-                }
-                if(field.getIncomename()==0){
-                    a.setIncomeName("*");
-                }
-                if(field.getIncomeremark()==0){
-                    a.setIncomeRemark("*");
-                }
-                if(field.getPay()==0){
-                    a.setPay("*");
-                }
-                if(field.getPayaccount()==0){
-                    a.setPayAccount("*");
-                }
-                if(field.getPayname()==0){
-                    a.setPayName("*");
-                }
-                if(field.getPayremark()==0){
-                    a.setPayRemark("*");
-                }
-                if(field.getRemark()==0){
-                    a.setRemark("*");
-                }
-                if(field.getStorename()==0){
-                    a.setStoreName("*");
-                }
-                if(field.getType()==0){
-                    a.setType("*");
-                }
-                if(field.getTradedata()==0){
-                    a.setTradeData(null);
-                }
-
-            }
-        }
+        this.getByFieldFiltter(list, field);
         return list;
     }
     @Override
@@ -378,8 +326,13 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public Budget getBudget(Long id) {
-        return this.budgetMapper.selectByPrimaryKey(id.intValue());
+    public Budget getBudget(Long id,Long userId) {
+        Budget budget = this.budgetMapper.selectByPrimaryKey(id.intValue());
+        BudgetField field = this.budgetFieldMapper.getFieldFillterByUserId(userId);
+        List<Budget> list = new ArrayList<>();
+        list.add(budget);
+        this.getByFieldFiltter(list, field);
+        return list.get(0);
     }
 
     private static String transCellType(Object value){
@@ -438,6 +391,7 @@ public class BudgetServiceImpl implements BudgetService {
         }
         return true;
     }
+    @Override
     public String doDeleteHis(String ids ,Long userId){
         String _ids = "";
         List<String> hasNotRemoveIds = new ArrayList<>();
@@ -456,4 +410,61 @@ public class BudgetServiceImpl implements BudgetService {
         }
         return _ids;
     }
+    public List<Budget> getByFieldFiltter(List<Budget> list,BudgetField field){
+        if(field==null){
+            field = new BudgetField();
+        }
+        if(list!=null&&!list.isEmpty()){
+            for (Budget a: list) {
+                if(field.getAmountremark()==0){
+                    a.setAmountRemark("*");
+                }
+                if(field.getCheckname()==0){
+                    a.setCheckName("*");
+                }
+                if(field.getCreateusername()==0){
+                    a.setCreateUsername("*");
+                }
+                if(field.getIncome()==0){
+                    a.setIncome("*");
+                }
+                if(field.getIncomeaccount()==0){
+                    a.setIncomeAccount("*");
+                }
+                if(field.getIncomename()==0){
+                    a.setIncomeName("*");
+                }
+                if(field.getIncomeremark()==0){
+                    a.setIncomeRemark("*");
+                }
+                if(field.getPay()==0){
+                    a.setPay("*");
+                }
+                if(field.getPayaccount()==0){
+                    a.setPayAccount("*");
+                }
+                if(field.getPayname()==0){
+                    a.setPayName("*");
+                }
+                if(field.getPayremark()==0){
+                    a.setPayRemark("*");
+                }
+                if(field.getRemark()==0){
+                    a.setRemark("*");
+                }
+                if(field.getStorename()==0){
+                    a.setStoreName("*");
+                }
+                if(field.getType()==0){
+                    a.setType("*");
+                }
+                if(field.getTradedata()==0){
+                    a.setTradeData(null);
+                }
+
+            }
+        }
+        return list;
+    }
+
 }

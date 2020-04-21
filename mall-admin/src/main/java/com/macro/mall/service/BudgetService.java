@@ -78,7 +78,7 @@ public interface BudgetService {
      * @param id
      * @return
      */
-    Budget getBudget(Long id);
+    Budget getBudget(Long id,Long userId);
 
     String doDeleteHis(String ids, Long userId);
 }

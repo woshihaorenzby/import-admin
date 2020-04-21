@@ -112,8 +112,9 @@ public class BudgetController {
     @ApiOperation("获取单个数据")
     @RequestMapping(value = "/getImportData/{id}" ,method = RequestMethod.GET )
     @ResponseBody
-    public CommonResult<Budget> getImportData(@PathVariable("id") Long id) {
-        Budget budget = this.budgetService.getBudget(id);
+    public CommonResult<Budget> getImportData(HttpServletRequest request,@PathVariable("id") Long id) {
+        Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
+        Budget budget = this.budgetService.getBudget(id,userId);
         return CommonResult.success(budget);
     }
     /**
