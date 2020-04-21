@@ -364,7 +364,7 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public boolean update(Long id, Budget budget) {
-        int i = this.budgetMapper.updateByPrimaryKeyWithBLOBs(budget);
+        int i = this.budgetMapper.updateByPrimaryKeySelective(budget);
         if (i == 0)
             return false;
         else if (i == 1)
@@ -426,7 +426,7 @@ public class BudgetServiceImpl implements BudgetService {
                     a.setCreateUsername("*");
                 }
                 if(field.getIncome()==0){
-                    a.setIncome("*");
+                    a.setIncome("-1");
                 }
                 if(field.getIncomeaccount()==0){
                     a.setIncomeAccount("*");
@@ -438,7 +438,7 @@ public class BudgetServiceImpl implements BudgetService {
                     a.setIncomeRemark("*");
                 }
                 if(field.getPay()==0){
-                    a.setPay("*");
+                    a.setPay("-1");
                 }
                 if(field.getPayaccount()==0){
                     a.setPayAccount("*");

@@ -56,8 +56,6 @@ public class Budget implements Serializable {
     @ApiModelProperty(value = "备注")
     private String remark;
 
-    private static final long serialVersionUID = 1L;
-
     public Integer getId() {
         return id;
     }
@@ -217,7 +215,6 @@ public class Budget implements Serializable {
         sb.append(", payRemark=").append(payRemark);
         sb.append(", incomeRemark=").append(incomeRemark);
         sb.append(", remark=").append(remark);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }
