@@ -1,6 +1,5 @@
 package com.macro.mall.dto;
 
-import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -45,6 +44,8 @@ public class BudgetParam implements Serializable {
     private Date startDate;
 
     private Date endDate;
+
+    private String anyColumn;
     public String getIds() {
         return ids;
     }
@@ -203,5 +204,13 @@ public class BudgetParam implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getAnyColumn() {
+        return anyColumn;
+    }
+
+    public void setAnyColumn(String anyColumn) {
+        this.anyColumn = anyColumn;
     }
 }

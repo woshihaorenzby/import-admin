@@ -293,12 +293,12 @@ public class BudgetExample {
         }
 
         public Criteria andStoreNameLike(String value) {
-            addCriterion("store_name like", value, "storeName");
+            addCriterion("store_name like","%"+value+"%", "storeName");
             return (Criteria) this;
         }
 
         public Criteria andStoreNameNotLike(String value) {
-            addCriterion("store_name not like", value, "storeName");
+            addCriterion("store_name not like", "%"+value+"%", "storeName");
             return (Criteria) this;
         }
 
@@ -363,12 +363,12 @@ public class BudgetExample {
         }
 
         public Criteria andTypeLike(String value) {
-            addCriterion("type like", value, "type");
+            addCriterion("type like", "%"+value+"%", "type");
             return (Criteria) this;
         }
 
         public Criteria andTypeNotLike(String value) {
-            addCriterion("type not like", value, "type");
+            addCriterion("type not like", "%"+value+"%", "type");
             return (Criteria) this;
         }
 
@@ -433,12 +433,12 @@ public class BudgetExample {
         }
 
         public Criteria andPayLike(String value) {
-            addCriterion("pay like", value, "pay");
+            addCriterion("pay like", "%"+value+"%", "pay");
             return (Criteria) this;
         }
 
         public Criteria andPayNotLike(String value) {
-            addCriterion("pay not like", value, "pay");
+            addCriterion("pay not like", "%"+value+"%", "pay");
             return (Criteria) this;
         }
 
@@ -503,12 +503,12 @@ public class BudgetExample {
         }
 
         public Criteria andIncomeLike(String value) {
-            addCriterion("income like", value, "income");
+            addCriterion("income like", "%"+value+"%", "income");
             return (Criteria) this;
         }
 
         public Criteria andIncomeNotLike(String value) {
-            addCriterion("income not like", value, "income");
+            addCriterion("income not like", "%"+value+"%", "income");
             return (Criteria) this;
         }
 
@@ -573,12 +573,12 @@ public class BudgetExample {
         }
 
         public Criteria andPayNameLike(String value) {
-            addCriterion("pay_name like", value, "payName");
+            addCriterion("pay_name like", "%"+value+"%", "payName");
             return (Criteria) this;
         }
 
         public Criteria andPayNameNotLike(String value) {
-            addCriterion("pay_name not like", value, "payName");
+            addCriterion("pay_name not like", "%"+value+"%", "payName");
             return (Criteria) this;
         }
 
@@ -643,12 +643,12 @@ public class BudgetExample {
         }
 
         public Criteria andPayAccountLike(String value) {
-            addCriterion("pay_account like", value, "payAccount");
+            addCriterion("pay_account like","%"+value+"%", "payAccount");
             return (Criteria) this;
         }
 
         public Criteria andPayAccountNotLike(String value) {
-            addCriterion("pay_account not like", value, "payAccount");
+            addCriterion("pay_account not like", "%"+value+"%", "payAccount");
             return (Criteria) this;
         }
 
@@ -713,12 +713,12 @@ public class BudgetExample {
         }
 
         public Criteria andIncomeNameLike(String value) {
-            addCriterion("income_name like", value, "incomeName");
+            addCriterion("income_name like", "%"+value+"%", "incomeName");
             return (Criteria) this;
         }
 
         public Criteria andIncomeNameNotLike(String value) {
-            addCriterion("income_name not like", value, "incomeName");
+            addCriterion("income_name not like", "%"+value+"%", "incomeName");
             return (Criteria) this;
         }
 
@@ -783,12 +783,12 @@ public class BudgetExample {
         }
 
         public Criteria andIncomeAccountLike(String value) {
-            addCriterion("income_account like", value, "incomeAccount");
+            addCriterion("income_account like", "%"+value+"%", "incomeAccount");
             return (Criteria) this;
         }
 
         public Criteria andIncomeAccountNotLike(String value) {
-            addCriterion("income_account not like", value, "incomeAccount");
+            addCriterion("income_account not like", "%"+value+"%", "incomeAccount");
             return (Criteria) this;
         }
 
@@ -853,12 +853,12 @@ public class BudgetExample {
         }
 
         public Criteria andCheckNameLike(String value) {
-            addCriterion("check_name like", value, "checkName");
+            addCriterion("check_name like", "%"+value+"%", "checkName");
             return (Criteria) this;
         }
 
         public Criteria andCheckNameNotLike(String value) {
-            addCriterion("check_name not like", value, "checkName");
+            addCriterion("check_name not like","%"+value+"%", "checkName");
             return (Criteria) this;
         }
 
@@ -983,12 +983,12 @@ public class BudgetExample {
         }
 
         public Criteria andCreateUsernameLike(String value) {
-            addCriterion("create_username like", value, "createUsername");
+            addCriterion("create_username like", "%"+value+"%", "createUsername");
             return (Criteria) this;
         }
 
         public Criteria andCreateUsernameNotLike(String value) {
-            addCriterion("create_username not like", value, "createUsername");
+            addCriterion("create_username not like","%"+value+"%", "createUsername");
             return (Criteria) this;
         }
 
@@ -1025,6 +1025,27 @@ public class BudgetExample {
         }
         public Criteria andRemark(String value) {
             addCriterion("remark like", "%"+value+"%", "remark");
+            return (Criteria) this;
+        }
+        public Criteria andAnyColumnLike(String value) {
+            addCriterion("(" +
+                    "remark like"+"%"+value+"% or" +
+                    "pay_remark like"+"%"+value+"% or" +
+                    "amount_remark like"+"%"+value+"% or" +
+                    "create_username like"+"%"+value+"% or" +
+                    "check_name like"+"%"+value+"% or" +
+                    "income_account like"+"%"+value+"% or" +
+                    "income_name like"+"%"+value+"% or" +
+                    "pay_account like"+"%"+value+"% or" +
+                    "pay_name like"+"%"+value+"% or" +
+                    "income like"+"%"+value+"% or" +
+                    "pay like"+"%"+value+"% or" +
+                    "type like"+"%"+value+"% or" +
+                    "store_name like"+"%"+value+"% or" +
+                    "store_name like"+"%"+value+"% or" +
+                    "store_name like"+"%"+value+"% or" +
+                    "store_name like"+"%"+value+"% or" +
+                    "store_name like"+"%"+value+"% "  );
             return (Criteria) this;
         }
     }

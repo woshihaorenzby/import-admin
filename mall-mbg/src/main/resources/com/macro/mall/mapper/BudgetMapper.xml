@@ -373,49 +373,49 @@
       <if test="tradeData != null">
         trade_data = #{tradeData,jdbcType=DATE},
       </if>
-      <if test="storeName != null and storeName!='*'">
+      <if test='storeName != null and "*" !=  storeName'>
         store_name = #{storeName,jdbcType=VARCHAR},
       </if>
-      <if test="type != null  and type!='*'">
-        'type' = #{type,jdbcType=VARCHAR},
+      <if test='type != null  and type!="*"'>
+        type = #{type,jdbcType=VARCHAR},
       </if>
-      <if test="pay != null  and pay!='-1'">
+      <if test='pay != null  and pay!="*"'>
         pay = #{pay,jdbcType=VARCHAR},
       </if>
-      <if test="income != null  and income!='-1'">
+      <if test='income != null  and income!="*"'>
         income = #{income,jdbcType=VARCHAR},
       </if>
-      <if test="payName != null  and payName!='*'">
+      <if test='payName != null  and payName!="*"'>
         pay_name = #{payName,jdbcType=VARCHAR},
       </if>
-      <if test="payAccount != null  and payAccount!='*'">
+      <if test='payAccount != null  and payAccount!="*"'>
         pay_account = #{payAccount,jdbcType=VARCHAR},
       </if>
-      <if test="incomeName != null  and incomeName!='*'">
+      <if test='incomeName != null  and incomeName!="*"'>
         income_name = #{incomeName,jdbcType=VARCHAR},
       </if>
-      <if test="incomeAccount != null and incomeAccount!='*'">
+      <if test='incomeAccount != null and incomeAccount!="*"'>
         income_account = #{incomeAccount,jdbcType=VARCHAR},
       </if>
-      <if test="checkName != null and checkName!='*'">
+      <if test='checkName != null and checkName!="*"'>
         check_name = #{checkName,jdbcType=VARCHAR},
       </if>
       <if test="createUserId != null ">
         create_user_id = #{createUserId,jdbcType=INTEGER},
       </if>
-      <if test="createUsername != null and createUsername!='*'">
+      <if test='createUsername != null'>
         create_username = #{createUsername,jdbcType=VARCHAR},
       </if>
-      <if test="amountRemark != null and amountRemark!='*'">
+      <if test='amountRemark != null and amountRemark!="*"'>
         amount_remark = #{amountRemark,jdbcType=LONGVARCHAR},
       </if>
-      <if test="payRemark != null and payRemark!='*'">
+      <if test='payRemark != null and payRemark!="*"'>
         pay_remark = #{payRemark,jdbcType=LONGVARCHAR},
       </if>
-      <if test="incomeRemark != null and incomeRemark!='*'">
+      <if test='incomeRemark != null and incomeRemark!="*"'>
         income_remark = #{incomeRemark,jdbcType=LONGVARCHAR},
       </if>
-      <if test="remark != null and remark!='*'">
+      <if test='remark != null and remark!="*"'>
         remark = #{remark,jdbcType=LONGVARCHAR},
       </if>
     </set>

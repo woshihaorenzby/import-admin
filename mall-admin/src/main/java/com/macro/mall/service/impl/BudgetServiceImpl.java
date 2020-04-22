@@ -426,7 +426,7 @@ public class BudgetServiceImpl implements BudgetService {
                     a.setCreateUsername("*");
                 }
                 if(field.getIncome()==0){
-                    a.setIncome("-1");
+                    a.setIncome("*");
                 }
                 if(field.getIncomeaccount()==0){
                     a.setIncomeAccount("*");
@@ -438,7 +438,7 @@ public class BudgetServiceImpl implements BudgetService {
                     a.setIncomeRemark("*");
                 }
                 if(field.getPay()==0){
-                    a.setPay("-1");
+                    a.setPay("*");
                 }
                 if(field.getPayaccount()==0){
                     a.setPayAccount("*");
