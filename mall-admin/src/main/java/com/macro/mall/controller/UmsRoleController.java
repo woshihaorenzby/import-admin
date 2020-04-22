@@ -1,5 +1,6 @@
 package com.macro.mall.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.macro.mall.common.api.CommonPage;
 import com.macro.mall.common.api.CommonResult;
 import com.macro.mall.model.*;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 后台用户角色管理
@@ -134,8 +136,9 @@ public class UmsRoleController {
     @ApiOperation("给角色分配资源")
     @RequestMapping(value = "/allocResource", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult allocResource(@RequestParam Long roleId, @RequestParam List<Long> resourceIds,@RequestParam List<String> fields) {
-        int count = roleService.allocResource(roleId, resourceIds,fields);
+    public CommonResult allocResource(@RequestParam Long roleId, @RequestParam List<Long> resourceIds,@RequestParam String fields) {
+        List<List<Object>> list = JSON.parseObject(fields, List.class);
+        int count = roleService.allocResource(roleId, resourceIds,list);
         return CommonResult.success(count);
     }
 

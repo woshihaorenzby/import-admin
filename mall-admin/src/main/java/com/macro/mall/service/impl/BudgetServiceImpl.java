@@ -415,6 +415,13 @@ public class BudgetServiceImpl implements BudgetService {
             field = new BudgetField();
         }
         if(list!=null&&!list.isEmpty()){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = null;
+            try {
+                date = sdf.parse("1900-01-01");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             for (Budget a: list) {
                 if(field.getAmountremark()==0){
                     a.setAmountRemark("*");
@@ -459,7 +466,7 @@ public class BudgetServiceImpl implements BudgetService {
                     a.setType("*");
                 }
                 if(field.getTradedata()==0){
-                    a.setTradeData(null);
+                    a.setTradeData(date);
                 }
 
             }

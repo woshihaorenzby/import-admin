@@ -25,7 +25,7 @@ public interface ImportDataService {
     /**
      * 分页查询专题
      */
-    List<ImportData> list(Long userId, ImportDateParam importDateParam, Integer pageNum, Integer pageSize,String fieldName,String sortingType);
+    List<ImportData> list(Long userId, ImportDateParam importDateParam, Integer pageNum, Integer pageSize,String fieldName,String sortingType,Integer type);
 
     /**
      * 导入
@@ -77,7 +77,7 @@ public interface ImportDataService {
      * @param id
      * @return
      */
-    ImportData getImportData(Long id);
+    ImportData getImportData(Long id,Long userId,Integer type);
 
-    String doDeleteHis(String ids ,Long userId);
+    String doDeleteHis(String ids ,Long userId,Integer type);
 }

@@ -7,6 +7,7 @@ import com.macro.mall.model.UmsRole;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 后台角色管理Service
@@ -74,5 +75,5 @@ public interface UmsRoleService {
      * 给角色分配资源
      */
     @Transactional
-    int allocResource(Long roleId, List<Long> resourceIds, List<String> fields);
+    int allocResource(Long roleId, List<Long> resourceIds, List<List<Object>> fields);
 }

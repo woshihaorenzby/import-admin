@@ -21,4 +21,7 @@ public interface BudgetFieldMapper {
     int updateByExample(@Param("record") BudgetField record, @Param("example") BudgetFieldExample example);
 
     BudgetField getFieldFillterByUserId(@Param("userId") Long userId);
+
+
+    BudgetField getFieldFillterByRoleId(@Param("roleId")Long roleId);
 }

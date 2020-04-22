@@ -1,8 +1,9 @@
 package com.macro.mall.service.impl;
 
+import com.macro.mall.mapper.BudgetFieldMapper;
+import com.macro.mall.mapper.ImportField1Mapper;
 import com.macro.mall.mapper.ImportFieldMapper;
-import com.macro.mall.model.ImportField;
-import com.macro.mall.model.ImportFieldExample;
+import com.macro.mall.model.*;
 import com.macro.mall.service.ImportDataService;
 import com.macro.mall.service.ImportFieldService;
 import io.swagger.annotations.ApiModelProperty;
@@ -29,50 +30,81 @@ public class ImportFieldServiceImpl implements ImportFieldService {
 
     @Autowired
     private ImportFieldMapper importFieldMapper;
+    @Autowired
+    private BudgetFieldMapper budgetFieldMapper;
+    @Autowired
+    private ImportField1Mapper importField1Mapper;
 
     /**
      * 获取所有会员登录
      *
-     * @param importField 角色Id
+     * @param roleId 角色Id
      */
     @Override
-    public List<Map<String,Object>> listAllByRoleId(ImportField importField) {
+    public List<Map<String,Object>> listAllByRoleId(Long roleId) {
         List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-        ImportField field = null;
-        if (importField != null && importField.getRoleId() != null) {
-            List<ImportField> importFields = this.importFieldMapper.listAllByRoleId(importField);
-            if (importFields != null && !importFields.isEmpty()) {
-                field = importFields.get(0);
-            }
-        }
-        if (field == null) {
-            field = new ImportField(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        }
-        try {
-            Class clazz = Class.forName("com.macro.mall.model.ImportField");
-            Field[] fields = clazz.getDeclaredFields();
-            for (Field f : fields) {
-                ApiModelProperty apiOperation = f.getAnnotation(ApiModelProperty.class);
-                String value = null;
-                if(apiOperation!=null){
-                    value= apiOperation.value();
+        ImportField field = this.getObjByRoleId(roleId);
+        BudgetField bugBudgetField = this.getBugBudgetObjByRoleId(roleId);
+        ImportField1 field1 = this.getObjByRoleId1(roleId);
+        List<Object> objects = new ArrayList<>();
+        objects.add(field1);
+        objects.add(field);
+        objects.add(bugBudgetField);
+        objects.forEach(obj->{
+            try {
+                Map<String,Object> m = new HashMap<>();
+                List<Map<String,Object>> fList = new ArrayList<>();
+                Class clazz = Class.forName(obj.getClass().getName());
+                String key = clazz.getSimpleName();
+                Field[] fields = clazz.getDeclaredFields();
+                for (Field f : fields) {
+                    ApiModelProperty apiOperation = f.getAnnotation(ApiModelProperty.class);
+                    String value = null;
+                    if(apiOperation!=null){
+                        value= apiOperation.value();
+                    }
+                    PropertyDescriptor pd  = new PropertyDescriptor(f.getName(), clazz);
+                    Method rM = pd.getReadMethod();
+                    Integer num = (Integer) rM.invoke(obj);
+                    if(!"id".equals(f.getName())&&!"importMonth".equals(f.getName())&&!"roleId".equals(f.getName())&&!"userId".equals(f.getName())&&!"createuserid".equals(f.getName())){
+                        Map<String,Object> map = new HashMap<String, Object>();
+                        map.put("name",key+"_"+f.getName());
+                        map.put("check",num);
+                        map.put("title",value);
+                        fList.add(map);
+                    }
                 }
-                PropertyDescriptor pd  = new PropertyDescriptor(f.getName(), clazz);
-                Method rM = pd.getReadMethod();
-                Integer num = (Integer) rM.invoke(field);
-                if(!"id".equals(f.getName())&&!"importMonth".equals(f.getName())&&!"roleId".equals(f.getName())){
-                    Map<String,Object> map = new HashMap<String, Object>();
-                    map.put("name",f.getName());
-                    map.put("check",num);
-                    map.put("title",value);
-                    list.add(map);
+                String name = "";
+                switch (key){
+                    case "ImportField":
+                        name = "数据";
+                        break;
+                    case "BudgetField":
+                        name = "收支";
+                        break;
+                    case "ImportField1":
+                        name = "信息";
+                        break;
                 }
+                m.put("key",key);
+                m.put("name",name);
+                m.put("list",fList);
+                list.add(m);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        });
+
 
         return list;
+    }
+
+    private BudgetField getBugBudgetObjByRoleId(Long roleId) {
+        BudgetField budgetField = this.budgetFieldMapper.getFieldFillterByRoleId(roleId);
+        if (budgetField == null) {
+            budgetField = new BudgetField(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0);
+        }
+        return budgetField;
     }
 
     @Override
@@ -83,6 +115,34 @@ public class ImportFieldServiceImpl implements ImportFieldService {
     @Override
     public int insertSelective(ImportField record) {
         return this.importFieldMapper.insertSelective(record);
+    }
+    public  ImportField getObjByRoleId(Long roleId){
+        ImportField field = null;
+        if (roleId != null ) {
+            List<ImportField> importFields = this.importFieldMapper.listAllByRoleId(roleId);
+
+            if (importFields != null && !importFields.isEmpty()) {
+                field = importFields.get(0);
+            }
+        }
+        if (field == null) {
+            field = new ImportField(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0);
+        }
+        return  field;
+    }
+    public  ImportField1 getObjByRoleId1(Long roleId){
+        ImportField1 field = null;
+        if (roleId != null ) {
+            List<ImportField1> importFields = this.importField1Mapper.listAllByRoleId(roleId);
+
+            if (importFields != null && !importFields.isEmpty()) {
+                field = importFields.get(0);
+            }
+        }
+        if (field == null) {
+            field = new ImportField1(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0);
+        }
+        return  field;
     }
 
 }

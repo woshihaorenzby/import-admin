@@ -243,11 +243,22 @@
     select bf.id, bf.tradeData, bf.storeName, bf.type, bf.pay, bf.income, bf.payName, bf.payAccount, bf.incomeName, bf.incomeAccount,
     bf.checkName, bf.createUserId, bf.createUsername, bf.amountRemark, bf.payRemark, bf.incomeRemark, bf.remark,
     bf.user_id
-    from budget_field as bf
+    from budget_field as bf ,ums_admin_role_relation  as yarr
+    where bf.user_id=yarr.role_id
     <if test="userId!=null">
-      where bf.user_id = #{userId,jdbcType=INTEGER}
+      and yarr.admin_id = #{userId,jdbcType=INTEGER}
     </if>
   </select>
+  <select id="getFieldFillterByRoleId" resultType="com.macro.mall.model.BudgetField">
+    select bf.tradeData, bf.storeName, bf.type, bf.pay, bf.income, bf.payName, bf.payAccount, bf.incomeName, bf.incomeAccount,
+    bf.checkName, bf.createUserId, bf.createUsername, bf.amountRemark, bf.payRemark, bf.incomeRemark, bf.remark,
+    bf.user_id
+    from budget_field as bf
+    <if test="roleId!=null">
+      where  bf.user_id = #{roleId,jdbcType=INTEGER}
+    </if>
+  </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     update budget_field
     <set>

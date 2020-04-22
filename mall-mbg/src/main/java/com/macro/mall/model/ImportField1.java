@@ -3,7 +3,7 @@ package com.macro.mall.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
-public class ImportField implements Serializable {
+public class ImportField1 implements Serializable {
     private Integer id =0;
 
     @ApiModelProperty(value = "导入月")
@@ -177,9 +177,9 @@ public class ImportField implements Serializable {
         this.createUserName = createUserName;
     }
 
-    public ImportField() {}
+    public ImportField1() {}
 
-    public ImportField(Integer id, Integer importMonth, Integer importDay, Integer aInfo, Integer wangwangId, Integer aPrice, Integer storeName, Integer bPrice, Integer commission, Integer bInfo, Integer remark1, Integer remark2, Integer remark3,Integer code,Integer createUserName) {
+    public ImportField1(Integer id, Integer importMonth, Integer importDay, Integer aInfo, Integer wangwangId, Integer aPrice, Integer storeName, Integer bPrice, Integer commission, Integer bInfo, Integer remark1, Integer remark2, Integer remark3,Integer code,Integer createUserName) {
         this.id = id;
         this.importMonth = importMonth;
         this.importDay = importDay;

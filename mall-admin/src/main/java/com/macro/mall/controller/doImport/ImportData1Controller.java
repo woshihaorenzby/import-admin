@@ -1,14 +1,9 @@
 package com.macro.mall.controller.doImport;
 
-import com.alibaba.fastjson.JSON;
 import com.macro.mall.common.api.CommonPage;
 import com.macro.mall.common.api.CommonResult;
 import com.macro.mall.dto.ImportDateParam;
-import com.macro.mall.dto.PmsBrandParam;
-import com.macro.mall.model.CmsPrefrenceArea;
 import com.macro.mall.model.ImportData;
-import com.macro.mall.model.PmsBrand;
-import com.macro.mall.security.util.JwtTokenUtil;
 import com.macro.mall.service.ImportDataService;
 import com.macro.mall.service.UmsAdminService;
 import io.swagger.annotations.Api;
@@ -21,13 +16,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
-@Api(tags = "ImportDataController", description = "用户首页")
-@RequestMapping("/importData")
-public class ImportDataController {
+@Api(tags = "ImportData1Controller", description = "用户首页")
+@RequestMapping("/importData1")
+public class ImportData1Controller {
     @Autowired
     private ImportDataService importDataService;
     @Autowired
@@ -40,7 +34,7 @@ public class ImportDataController {
     @ResponseBody
     public CommonResult<CommonPage<ImportData>> listAll(HttpServletRequest request, @RequestBody ImportDateParam importDateParam, @PathVariable("pageNum")Integer pageNum, @PathVariable("pageSize")Integer pageSize, @PathVariable("fieldName")String fieldName, @PathVariable("sortingType")String sortingType) {
         Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
-        List<ImportData> list = this.importDataService.list(userId, importDateParam, pageNum, pageSize,fieldName,sortingType,0);
+        List<ImportData> list = this.importDataService.list(userId, importDateParam, pageNum, pageSize,fieldName,sortingType,1);
         return CommonResult.success(CommonPage.restPage(list));
     }
     @ApiOperation("导出模板")
@@ -56,7 +50,7 @@ public class ImportDataController {
     public void exportData(HttpServletRequest request, HttpServletResponse response, @RequestBody ImportDateParam importDateParam) {
         Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
         //调用Excel导出工具类
-        this.importDataService.export(response,this.importDataService.list(userId, importDateParam, 1, Integer.MAX_VALUE,null,null,0),arr);
+        this.importDataService.export(response,this.importDataService.list(userId, importDateParam, 1, Integer.MAX_VALUE,null,null,1),arr);
     }
     /**
      * excel导入
@@ -104,7 +98,7 @@ public class ImportDataController {
     @ResponseBody
     public CommonResult<String> doDeleteHis(HttpServletRequest request,  @RequestParam(value = "ids") String ids) {
         Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
-        String i = this.importDataService.doDeleteHis(ids,userId,0);
+        String i = this.importDataService.doDeleteHis(ids,userId,1);
         return CommonResult.success(i);
     }
     /**
@@ -117,9 +111,9 @@ public class ImportDataController {
     @ApiOperation("获取单个数据")
     @RequestMapping(value = "/getImportData/{id}" ,method = RequestMethod.GET )
     @ResponseBody
-    public CommonResult<ImportData> getImportData(HttpServletRequest request,@PathVariable("id") Long id) {
+    public CommonResult<ImportData> getImportData(HttpServletRequest request, @PathVariable("id") Long id) {
         Long userId = this.umsAdminService.getAdminByUsername(String.valueOf(request.getAttribute("userName"))).getId();
-        ImportData importData = this.importDataService.getImportData(id,userId,0);
+        ImportData importData = this.importDataService.getImportData(id,userId,1);
         return CommonResult.success(importData);
     }
     /**

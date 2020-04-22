@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.ImportFieldMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.ImportField">
+<mapper namespace="com.macro.mall.mapper.ImportField1Mapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.ImportField1">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="import_month" jdbcType="INTEGER" property="importMonth" />
     <result column="import_day" jdbcType="INTEGER" property="importDay" />
@@ -81,13 +81,13 @@
     id as id, code as code ,create_user_name as createUserName,import_month as importMonth, import_day as importDay, a_info as aInfo, wangwang_id as wangwangId, a_price as aPrice , store_name as storeName, b_price as bPrice,
     commission as commission, b_info as bInfo, remark_1 as remark1, remark_2 as remark2, remark_3 as remark3, role_id as roleId
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.ImportFieldExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.macro.mall.model.ImportField1Example" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from import_field
+    from import_field_1
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -95,32 +95,32 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.ImportFieldExample">
-    delete from import_field
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.ImportField1Example">
+    delete from import_field_1
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.ImportField">
+  <insert id="insert" parameterType="com.macro.mall.model.ImportField1">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into import_field (import_month, import_day, a_info, 
-      wangwang_id, a_price, store_name, 
-      b_price, commission, b_info, 
-      remark_1, remark_2, remark_3, 
-      role_id,code ,create_user_name)
-    values (#{importMonth,jdbcType=INTEGER}, #{importDay,jdbcType=INTEGER}, #{aInfo,jdbcType=INTEGER}, 
-      #{wangwangId,jdbcType=INTEGER}, #{aPrice,jdbcType=INTEGER}, #{storeName,jdbcType=INTEGER}, 
-      #{bPrice,jdbcType=INTEGER}, #{commission,jdbcType=INTEGER}, #{bInfo,jdbcType=INTEGER}, 
-      #{remark1,jdbcType=INTEGER}, #{remark2,jdbcType=INTEGER}, #{remark3,jdbcType=INTEGER}, 
-      #{roleId,jdbcType=INTEGER},#{code,jdbcType=INTEGER},#{createUserName,jdbcType=INTEGER})
+    insert into import_field_1 (import_month, import_day, a_info,
+    wangwang_id, a_price, store_name,
+    b_price, commission, b_info,
+    remark_1, remark_2, remark_3,
+    role_id,code ,create_user_name)
+    values (#{importMonth,jdbcType=INTEGER}, #{importDay,jdbcType=INTEGER}, #{aInfo,jdbcType=INTEGER},
+    #{wangwangId,jdbcType=INTEGER}, #{aPrice,jdbcType=INTEGER}, #{storeName,jdbcType=INTEGER},
+    #{bPrice,jdbcType=INTEGER}, #{commission,jdbcType=INTEGER}, #{bInfo,jdbcType=INTEGER},
+    #{remark1,jdbcType=INTEGER}, #{remark2,jdbcType=INTEGER}, #{remark3,jdbcType=INTEGER},
+    #{roleId,jdbcType=INTEGER},#{code,jdbcType=INTEGER},#{createUserName,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.ImportField">
+  <insert id="insertSelective" parameterType="com.macro.mall.model.ImportField1">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into import_field
+    insert into import_field_1
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="importMonth != null">
         import_month,
@@ -216,33 +216,33 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.ImportFieldExample" resultType="java.lang.Long">
-    select count(*) from import_field
+  <select id="countByExample" parameterType="com.macro.mall.model.ImportField1Example" resultType="java.lang.Long">
+    select count(*) from import_field_1
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <select id="getFieldFillterByUserId" resultType="com.macro.mall.model.ImportField" parameterType="java.lang.Long">
+  <select id="getFieldFillterByUserId" resultType="com.macro.mall.model.ImportField1" parameterType="java.lang.Long">
     select
     i.id as id,i.code as code ,i.create_user_name as createUserName, i.import_month as importMonth, i.import_day as importDay, i.a_info as aInfo, i.wangwang_id as wangwangId, i.a_price as aPrice , i.store_name as storeName, i.b_price as bPrice,
     i.commission as commission, i.b_info as bInfo, i.remark_1 as remark1, i.remark_2 as remark2, i.remark_3 as remark3, i.role_id as roleId
-    from import_field as i,ums_admin_role_relation  as yarr
+    from import_field_1 as i,ums_admin_role_relation  as yarr
     where i.role_id= yarr.role_id
     <if test="userId!=null">
       and yarr.admin_id =#{userId}
     </if>
 
   </select>
-  <select id="listAllByRoleId" resultType="com.macro.mall.model.ImportField">
-      select
-      <include refid="Base_Column_List" />
-      from import_field
-      <if test="roleId != null">
-        where role_id = #{roleId,jdbcType=INTEGER}
-      </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-    update import_field
+  <select id="listAllByRoleId" resultType="com.macro.mall.model.ImportField1">
+    select
+    <include refid="Base_Column_List" />
+    from import_field_1
+    <if test="roleId != null">
+      where role_id = #{roleId,jdbcType=INTEGER}
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update import_field_1
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -292,21 +292,21 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update import_field
+    update import_field_1
     set id = #{record.id,jdbcType=INTEGER},
-      import_month = #{record.importMonth,jdbcType=INTEGER},
-      import_day = #{record.importDay,jdbcType=INTEGER},
-      a_info = #{record.aInfo,jdbcType=INTEGER},
-      wangwang_id = #{record.wangwangId,jdbcType=INTEGER},
-      a_price = #{record.aPrice,jdbcType=INTEGER},
-      store_name = #{record.storeName,jdbcType=INTEGER},
-      b_price = #{record.bPrice,jdbcType=INTEGER},
-      commission = #{record.commission,jdbcType=INTEGER},
-      b_info = #{record.bInfo,jdbcType=INTEGER},
-      remark_1 = #{record.remark1,jdbcType=INTEGER},
-      remark_2 = #{record.remark2,jdbcType=INTEGER},
-      remark_3 = #{record.remark3,jdbcType=INTEGER},
-      role_id = #{record.roleId,jdbcType=INTEGER}
+    import_month = #{record.importMonth,jdbcType=INTEGER},
+    import_day = #{record.importDay,jdbcType=INTEGER},
+    a_info = #{record.aInfo,jdbcType=INTEGER},
+    wangwang_id = #{record.wangwangId,jdbcType=INTEGER},
+    a_price = #{record.aPrice,jdbcType=INTEGER},
+    store_name = #{record.storeName,jdbcType=INTEGER},
+    b_price = #{record.bPrice,jdbcType=INTEGER},
+    commission = #{record.commission,jdbcType=INTEGER},
+    b_info = #{record.bInfo,jdbcType=INTEGER},
+    remark_1 = #{record.remark1,jdbcType=INTEGER},
+    remark_2 = #{record.remark2,jdbcType=INTEGER},
+    remark_3 = #{record.remark3,jdbcType=INTEGER},
+    role_id = #{record.roleId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

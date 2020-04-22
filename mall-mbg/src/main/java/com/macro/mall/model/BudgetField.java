@@ -206,7 +206,6 @@ public class BudgetField implements Serializable {
     }
 
     public BudgetField(Integer tradedata, Integer storename, Integer type, Integer pay, Integer income, Integer payname, Integer payaccount, Integer incomename, Integer incomeaccount, Integer checkname, Integer createuserid, Integer createusername, Integer amountremark, Integer payremark, Integer incomeremark, Integer remark, Integer userId) {
-        this.id = id;
         this.tradedata = tradedata;
         this.storename = storename;
         this.type = type;

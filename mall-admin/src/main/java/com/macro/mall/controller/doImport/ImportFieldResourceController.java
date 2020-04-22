@@ -1,5 +1,6 @@
 package com.macro.mall.controller.doImport;
 
+import com.alibaba.fastjson.JSON;
 import com.macro.mall.common.api.CommonPage;
 import com.macro.mall.common.api.CommonResult;
 import com.macro.mall.model.ImportField;
@@ -32,9 +33,8 @@ public class ImportFieldResourceController {
     @RequestMapping(value = "/listAll/{roleId}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<Map<String,Object>>> listAll(@PathVariable Long roleId) {
-        ImportField i = new ImportField();
-        i.setRoleId(roleId);
-        List<Map<String,Object>> list = this.importFieldService.listAllByRoleId(i);
+        List<Map<String,Object>> list = this.importFieldService.listAllByRoleId(roleId);
+        System.out.println(JSON.toJSONString(list));
         return  CommonResult.success(list);
     }
 

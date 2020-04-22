@@ -5,10 +5,9 @@ import com.github.pagehelper.PageHelper;
 import com.macro.mall.common.api.ClassUtil;
 import com.macro.mall.dto.ImportDateParam;
 import com.macro.mall.mapper.ImportDataMapper;
+import com.macro.mall.mapper.ImportField1Mapper;
 import com.macro.mall.mapper.ImportFieldMapper;
-import com.macro.mall.model.ImportData;
-import com.macro.mall.model.ImportDataExample;
-import com.macro.mall.model.ImportField;
+import com.macro.mall.model.*;
 import com.macro.mall.service.ImportDataService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -38,13 +37,15 @@ public class ImportDataServiceImpl implements ImportDataService {
     private ImportDataMapper importDataMapper;
     @Autowired
     private ImportFieldMapper importFieldMapper;
+    @Autowired
+    private ImportField1Mapper importField1Mapper;
     @Override
     public List<ImportData> listAll(Long userId) {
         return null;
     }
 
     @Override
-    public List<ImportData> list(Long userId, ImportDateParam importDateParam, Integer pageNum, Integer pageSize,String fieldName,String sortingType) {
+    public List<ImportData> list(Long userId, ImportDateParam importDateParam, Integer pageNum, Integer pageSize,String fieldName,String sortingType,Integer type) {
         PageHelper.startPage(pageNum, pageSize);
         ImportDataExample example = new ImportDataExample();
         if(fieldName!=null&&sortingType!=null&&!"null".equals(fieldName)&&!"null".equals(sortingType)){
@@ -106,49 +107,118 @@ public class ImportDataServiceImpl implements ImportDataService {
             }
         }
         List<ImportData> list = this.importDataMapper.selectByExampleWithBLOBs(example);
-        ImportField field = this.importFieldMapper.getFieldFillterByUserId(userId);
-        if(field==null){
-            field = new ImportField();
+        list = this.getByFieldFiltter(list, type,userId);
+        return list;
+    }
+
+    private List<ImportData> getByFieldFiltter(List<ImportData> list, Integer type,Long userId) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse("1900-01-01");
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        if(list!=null&&!list.isEmpty()){
-            for (ImportData a: list) {
-                if(field.getAInfo()==0){
-                    a.setaInfo("*");
+        if(type==0){
+            ImportField field = this.importFieldMapper.getFieldFillterByUserId(userId);
+            if(field==null){
+                field = new ImportField();
+            }
+            if(list!=null&&!list.isEmpty()){
+                for (ImportData a: list) {
+                    if(field.getAInfo()==0){
+                        a.setaInfo("*");
+                    }
+                    if(field.getAPrice()==0){
+                        a.setaPrice(new BigDecimal(-1));
+                    }
+                    if(field.getBInfo()==0){
+                        a.setbInfo("*");
+                    }
+                    if(field.getBPrice()==0){
+                        a.setaPrice(new BigDecimal(-1));
+                    }
+                    if(field.getCommission()==0){
+                        a.setCommission(new BigDecimal(-1));
+                    }
+                    if(field.getImportDay()==0){
+                        a.setAddTime(date);
+                    }
+                    if(field.getRemark1()==0){
+                        a.setRemark1("*");
+                    }
+                    if(field.getRemark2()==0){
+                        a.setRemark2("*");
+                    }
+                    if(field.getRemark3()==0){
+                        a.setRemark3("*");
+                    }
+                    if(field.getStoreName()==0){
+                        a.setStoreName("*");
+                    }
+                    if(field.getWangwangId()==0){
+                        a.setWangwangId("*");
+                    }
+                    if(field.getCreateUserName()==0){
+                        a.setCreateUsername("*");
+                    }
+                    if(field.getCode()==0){
+                        a.setCode("*");
+                    }
                 }
-                if(field.getAPrice()==0){
-                    a.setaPrice(new BigDecimal(-1));
-                }
-                if(field.getBInfo()==0){
-                    a.setbInfo("*");
-                }
-                if(field.getBPrice()==0){
-                    a.setaPrice(new BigDecimal(-1));
-                }
-                if(field.getCommission()==0){
-                    a.setCommission(new BigDecimal(-1));
-                }
-                if(field.getImportDay()==0){
-                    a.setAddTime(null);
-                }
-                if(field.getRemark1()==0){
-                    a.setRemark1("*");
-                }
-                if(field.getRemark2()==0){
-                    a.setRemark2("*");
-                }
-                if(field.getRemark3()==0){
-                    a.setRemark3("*");
-                }
-                if(field.getStoreName()==0){
-                    a.setStoreName("*");
-                }
-                if(field.getWangwangId()==0){
-                    a.setWangwangId("*");
+            }
+        }else if(type==1){
+            ImportField1 field = this.importField1Mapper.getFieldFillterByUserId(userId);
+            if(field==null){
+                field = new ImportField1();
+            }
+            if(list!=null&&!list.isEmpty()){
+                for (ImportData a: list) {
+                    if(field.getAInfo()==0){
+                        a.setaInfo("*");
+                    }
+                    if(field.getAPrice()==0){
+                        a.setaPrice(new BigDecimal(-1));
+                    }
+                    if(field.getBInfo()==0){
+                        a.setbInfo("*");
+                    }
+                    if(field.getBPrice()==0){
+                        a.setaPrice(new BigDecimal(-1));
+                    }
+                    if(field.getCommission()==0){
+                        a.setCommission(new BigDecimal(-1));
+                    }
+                    if(field.getImportDay()==0){
+                        a.setAddTime(date);
+                    }
+                    if(field.getRemark1()==0){
+                        a.setRemark1("*");
+                    }
+                    if(field.getRemark2()==0){
+                        a.setRemark2("*");
+                    }
+                    if(field.getRemark3()==0){
+                        a.setRemark3("*");
+                    }
+                    if(field.getStoreName()==0){
+                        a.setStoreName("*");
+                    }
+                    if(field.getWangwangId()==0){
+                        a.setWangwangId("*");
+                    }
+                    if(field.getCreateUserName()==0){
+                        a.setCreateUsername("*");
+                    }
+                    if(field.getCode()==0){
+                        a.setCode("*");
+                    }
                 }
             }
         }
         return list;
     }
+
     @Override
     public List<ImportData> selectByExampleWithBLOBs(ImportDataExample example){
 
@@ -356,8 +426,12 @@ public class ImportDataServiceImpl implements ImportDataService {
     }
 
     @Override
-    public ImportData getImportData(Long id) {
-        return this.importDataMapper.selectByPrimaryKey(id.intValue());
+    public ImportData getImportData(Long id,Long userId,Integer type) {
+        ImportData importData = this.importDataMapper.selectByPrimaryKey(id.intValue());
+        List<ImportData> list = new ArrayList<>();
+        list.add(importData);
+        list = this.getByFieldFiltter(list, type,userId);
+        return list.get(0);
     }
 
     private static String transCellType(Object value){
@@ -417,12 +491,12 @@ public class ImportDataServiceImpl implements ImportDataService {
         }
         return true;
     }
-    public String doDeleteHis(String ids ,Long userId){
+    public String doDeleteHis(String ids ,Long userId,Integer type){
         String _ids = "";
         List<String> hasNotRemoveIds = new ArrayList<>();
         ImportDateParam importDateParam = new ImportDateParam();
         importDateParam.setIds(ids);
-        List<ImportData> list = this.list(userId, importDateParam, 1, Integer.MAX_VALUE, null, null);
+        List<ImportData> list = this.list(userId, importDateParam, 1, Integer.MAX_VALUE, null, null,type);
         for (ImportData data: list) {
             if(data.getCreateUserId().equals(userId)){
                 this.delete(data.getId().longValue());

@@ -14,9 +14,9 @@ import java.util.Map;
 public interface ImportFieldService {
     /**
      * 获取所有会员登录
-     * @param importField 是否为默认会员
+     * @param roleId 角色ID
      */
-    List<Map<String,Object>> listAllByRoleId(ImportField importField);
+    List<Map<String,Object>> listAllByRoleId(Long roleId);
 
     /**
      * 删除
