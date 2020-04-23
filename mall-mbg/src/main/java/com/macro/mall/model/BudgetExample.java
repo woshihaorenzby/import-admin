@@ -1029,23 +1029,23 @@ public class BudgetExample {
         }
         public Criteria andAnyColumnLike(String value) {
             addCriterion("(" +
-                    "remark like"+"%"+value+"% or" +
-                    "pay_remark like"+"%"+value+"% or" +
-                    "amount_remark like"+"%"+value+"% or" +
-                    "create_username like"+"%"+value+"% or" +
-                    "check_name like"+"%"+value+"% or" +
-                    "income_account like"+"%"+value+"% or" +
-                    "income_name like"+"%"+value+"% or" +
-                    "pay_account like"+"%"+value+"% or" +
-                    "pay_name like"+"%"+value+"% or" +
-                    "income like"+"%"+value+"% or" +
-                    "pay like"+"%"+value+"% or" +
-                    "type like"+"%"+value+"% or" +
-                    "store_name like"+"%"+value+"% or" +
-                    "store_name like"+"%"+value+"% or" +
-                    "store_name like"+"%"+value+"% or" +
-                    "store_name like"+"%"+value+"% or" +
-                    "store_name like"+"%"+value+"% "  );
+                    "remark like "+"'%"+value+"%' or " +
+                    "pay_remark like "+"'%"+value+"%' or " +
+                    "amount_remark like "+"'%"+value+"%' or " +
+                    "create_username like "+"'%"+value+"%' or " +
+                    "check_name like "+"'%"+value+"%' or " +
+                    "income_account like "+"'%"+value+"%' or " +
+                    "income_name like "+"'%"+value+"%' or " +
+                    "pay_account like "+"'%"+value+"%' or " +
+                    "pay_name like "+"'%"+value+"%' or " +
+                    "income like "+"'%"+value+"%' or " +
+                    "pay like "+"'%"+value+"%' or " +
+                    "type like "+"'%"+value+"%' or " +
+                    "store_name like "+"'%"+value+"%' or " +
+                    "store_name like "+"'%"+value+"%' or " +
+                    "store_name like "+"'%"+value+"%' or " +
+                    "store_name like "+"'%"+value+"%' or " +
+                    "store_name like "+"'%"+value+"%' )"  );
             return (Criteria) this;
         }
     }

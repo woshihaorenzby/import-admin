@@ -97,6 +97,9 @@ public class BudgetServiceImpl implements BudgetService {
             if(StringUtils.isNotEmpty(budgetParam.getCheckName())){
                 criteria.andCheckNameLike(budgetParam.getCheckName());
             }
+            if(StringUtils.isNotEmpty(budgetParam.getAnyColumn())){
+                criteria.andAnyColumnLike(budgetParam.getAnyColumn());
+            }
             if(budgetParam.getStartDate()!=null){
                 criteria.andTradeDataGreaterThanOrEqualTo(budgetParam.getStartDate());
             }

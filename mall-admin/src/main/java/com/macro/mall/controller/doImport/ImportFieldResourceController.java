@@ -34,7 +34,6 @@ public class ImportFieldResourceController {
     @ResponseBody
     public CommonResult<List<Map<String,Object>>> listAll(@PathVariable Long roleId) {
         List<Map<String,Object>> list = this.importFieldService.listAllByRoleId(roleId);
-        System.out.println(JSON.toJSONString(list));
         return  CommonResult.success(list);
     }
 

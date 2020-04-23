@@ -473,7 +473,9 @@ public class ImportDataServiceImpl implements ImportDataService {
 
     @Override
     public boolean save(ImportData importData) {
-        importData.setAddTime(new Date());
+        if(importData.getAddTime()==null){
+            importData.setAddTime(new Date());
+        }
         int insert = this.importDataMapper.insert(importData);
         if (insert == 0)
             return false;
