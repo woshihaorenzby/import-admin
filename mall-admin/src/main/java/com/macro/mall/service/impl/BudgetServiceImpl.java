@@ -269,7 +269,7 @@ public class BudgetServiceImpl implements BudgetService {
                         sbf.append(income);
                         imd.setIncome(income);
                     }else{
-
+                        sb.append("收入金额不是数值类型;");
                     }
                 }
                 if(map.get(ar.get(6))!=null){
