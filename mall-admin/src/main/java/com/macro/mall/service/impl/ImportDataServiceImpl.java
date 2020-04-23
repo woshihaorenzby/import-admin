@@ -315,18 +315,21 @@ public class ImportDataServiceImpl implements ImportDataService {
     public List<String> upload(String excelArr, String excelData,String userName,Long userId) {
         List<String> list = JSON.parseObject(excelArr, List.class);
         Map<String,Object> map = JSON.parseObject(excelData, Map.class);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         List<String> result = new ArrayList<>();
         list.remove(0);
         if(list!=null&&!list.isEmpty()){
             List<ImportData> l = new ArrayList<>();
             int row = 2;
+            Map<String,Integer> m = new HashMap<>();
             for (String a: list) {
                 StringBuilder sb = new StringBuilder();
+                StringBuffer sbf = new StringBuffer();
                 List<String> ar = JSON.parseObject(a, List.class);
                 ImportData imd = new ImportData();
                 if(map.get(ar.get(0))!=null){
                     String date = String.valueOf(map.get(ar.get(0)));
+                    sbf.append(date);
                     Date parse = new Date();
                     try {
                         if(StringUtils.isNotEmpty(date)){
@@ -340,19 +343,24 @@ public class ImportDataServiceImpl implements ImportDataService {
 //                "年月日","编号","A信息","旺旺号","A金额","店名","B金额","C佣金","B信息","备注1","备注2","备注3"
                 if(map.get(ar.get(1))!=null){
                     String code = String.valueOf(map.get(ar.get(1)));
+                    sbf.append(code);
                     imd.setCode(code);
                 }
                 if(map.get(ar.get(2))!=null){
                     String aInfo = String.valueOf(map.get(ar.get(2)));
+                    sbf.append(aInfo);
                     imd.setaInfo(aInfo);
                 }
                 if(map.get(ar.get(3))!=null){
                     String wangwangId = String.valueOf(map.get(ar.get(3)));
+                    sbf.append(wangwangId);
                     imd.setWangwangId(wangwangId);
                 }
                 if(map.get(ar.get(4))!=null){
                     if(isNumeric(String.valueOf(map.get(ar.get(4))))) {
-                        BigDecimal aPrice = new BigDecimal(String.valueOf(map.get(ar.get(4))));
+                        String aPrice_str = String.valueOf(map.get(ar.get(4)));
+                        BigDecimal aPrice = new BigDecimal(aPrice_str);
+                        sbf.append(aPrice_str);
                         imd.setaPrice(aPrice);
                     }else {
                         sb.append("A金额不是数值类型;");
@@ -360,11 +368,14 @@ public class ImportDataServiceImpl implements ImportDataService {
                 }
                 if(map.get(ar.get(5))!=null){
                     String storeName = String.valueOf(map.get(ar.get(5)));
+                    sbf.append(storeName);
                     imd.setStoreName(storeName);
                 }
                 if(map.get(ar.get(6))!=null){
                     if(isNumeric(String.valueOf(map.get(ar.get(6))))){
-                        BigDecimal bPrice = new BigDecimal(String.valueOf(map.get(ar.get(6))));
+                        String bPrice_str = String.valueOf(map.get(ar.get(6)));
+                        BigDecimal bPrice = new BigDecimal(bPrice_str);
+                        sbf.append(bPrice_str);
                         imd.setbPrice(bPrice);
                     }else{
                         sb.append("B金额不是数值类型;");
@@ -372,7 +383,9 @@ public class ImportDataServiceImpl implements ImportDataService {
                 }
                 if(map.get(ar.get(7))!=null){
                     if(isNumeric(String.valueOf(map.get(ar.get(7))))) {
-                        BigDecimal commission = new BigDecimal(String.valueOf(map.get(ar.get(7))));
+                        String commission_str = String.valueOf(map.get(ar.get(7)));
+                        BigDecimal commission = new BigDecimal(commission_str);
+                        sbf.append(commission_str);
                         imd.setCommission(commission);
                     }else{
                         sb.append("C佣金不是数值类型;");
@@ -380,25 +393,35 @@ public class ImportDataServiceImpl implements ImportDataService {
                 }
                 if(map.get(ar.get(8))!=null){
                     String bInfo = String.valueOf(map.get(ar.get(8)));
+                    sbf.append(bInfo);
                     imd.setbInfo(bInfo);
                 }
                 if(map.get(ar.get(9))!=null){
                     String remark1 = String.valueOf(map.get(ar.get(9)));
+                    sbf.append(remark1);
                     imd.setRemark1(remark1);
                 }
                 if(map.get(ar.get(10))!=null){
                     String remark2 = String.valueOf(map.get(ar.get(10)));
+                    sbf.append(remark2);
                     imd.setRemark2(remark2);
                 }
                 if(map.get(ar.get(11))!=null){
                     String remark3 = String.valueOf(map.get(ar.get(11)));
+                    sbf.append(remark3);
                     imd.setRemark3(remark3);
                 }
                 imd.setCreateUserId(userId);
                 imd.setCreateUsername(userName);
-                l.add(imd);
                 if(StringUtils.isNotEmpty(sb.toString())){
                     result.add("excel表第"+row+"行:"+sb.toString());
+                }else{
+                    if(m.get(sbf.toString())!=null){
+                        result.add("excel表第"+row+"行和第"+m.get(sbf.toString())+"数据重复");
+                    }else {
+                        l.add(imd);
+                        m.put(sbf.toString(),row);
+                    }
                 }
                 row++;
             }

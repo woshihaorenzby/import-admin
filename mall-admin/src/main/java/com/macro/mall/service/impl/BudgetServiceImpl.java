@@ -212,7 +212,7 @@ public class BudgetServiceImpl implements BudgetService {
     public List<String> upload(String excelArr, String excelData,String userName,Long userId) {
         List<String> list = JSON.parseObject(excelArr, List.class);
         Map<String,Object> map = JSON.parseObject(excelData, Map.class);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         List<String> result = new ArrayList<>();
         list.remove(0);
         if(list!=null&&!list.isEmpty()){
@@ -237,8 +237,6 @@ public class BudgetServiceImpl implements BudgetService {
                     }
                     imd.setTradeData(parse);
                 }
-//                "交易日期","店名","类别","金额相关备注","支出金额","收入金额","支出方名称","支出方账户","支出方备注","收入方名称","收入方账户","收入方备注","备注","核对人"
-//                "年月日","编号","A信息","旺旺号","A金额","店名","B金额","C佣金","B信息","备注1","备注2","备注3"
                 if(map.get(ar.get(1))!=null){
                     String storeName = String.valueOf(map.get(ar.get(1)));
                     sbf.append(storeName);
@@ -364,7 +362,7 @@ public class BudgetServiceImpl implements BudgetService {
         String str = null;
         if (value instanceof Date){
             Date date = (Date) value;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             str = sdf.format(date);
         }else{
             str = String.valueOf(value);
