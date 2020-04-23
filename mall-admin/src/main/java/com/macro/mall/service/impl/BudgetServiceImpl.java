@@ -321,6 +321,7 @@ public class BudgetServiceImpl implements BudgetService {
                     if(m.get(sbf.toString())!=null){
                         result.add("excel表第"+row+"行和第"+m.get(sbf.toString())+"行数据重复");
                     }else{
+                        m.put(sbf.toString(),row);
                         l.add(imd);
                     }
                 }
