@@ -218,12 +218,15 @@ public class BudgetServiceImpl implements BudgetService {
         if(list!=null&&!list.isEmpty()){
             List<Budget> l = new ArrayList<>();
             int row = 2;
+            Map<String,Integer> m = new HashMap<>();
             for (String a: list) {
                 StringBuilder sb = new StringBuilder();
+                StringBuffer sbf = new StringBuffer();
                 List<String> ar = JSON.parseObject(a, List.class);
                 Budget imd = new Budget();
                 if(map.get(ar.get(0))!=null){
                     String date = String.valueOf(map.get(ar.get(0)));
+                    sbf.append(date);
                     Date parse = new Date();
                     try {
                         if(StringUtils.isNotEmpty(date)){
@@ -238,19 +241,23 @@ public class BudgetServiceImpl implements BudgetService {
 //                "年月日","编号","A信息","旺旺号","A金额","店名","B金额","C佣金","B信息","备注1","备注2","备注3"
                 if(map.get(ar.get(1))!=null){
                     String storeName = String.valueOf(map.get(ar.get(1)));
+                    sbf.append(storeName);
                     imd.setStoreName(storeName);
                 }
                 if(map.get(ar.get(2))!=null){
                     String type = String.valueOf(map.get(ar.get(2)));
+                    sbf.append(type);
                     imd.setType(type);
                 }
                 if(map.get(ar.get(3))!=null){
                     String amountRemark = String.valueOf(map.get(ar.get(3)));
+                    sbf.append(amountRemark);
                     imd.setAmountRemark(amountRemark);
                 }
                 if(map.get(ar.get(4))!=null){
                     if(isNumeric(String.valueOf(map.get(ar.get(4))))) {
                         String pay = String.valueOf(map.get(ar.get(4)));
+                        sbf.append(pay);
                         imd.setPay(pay);
                     }else {
                         sb.append("支出金额不是数值类型;");
@@ -259,49 +266,63 @@ public class BudgetServiceImpl implements BudgetService {
                 if(map.get(ar.get(5))!=null){
                     if(isNumeric(String.valueOf(map.get(ar.get(5))))) {
                         String income = String.valueOf(map.get(ar.get(5)));
+                        sbf.append(income);
                         imd.setIncome(income);
                     }else{
 
                     }
                 }
                 if(map.get(ar.get(6))!=null){
-                        String payName = String.valueOf(map.get(ar.get(6)));
-                        imd.setPayName(payName);
+                    String payName = String.valueOf(map.get(ar.get(6)));
+                    sbf.append(payName);
+                    imd.setPayName(payName);
                 }
                 if(map.get(ar.get(7))!=null){
-                        String payAccount = String.valueOf(map.get(ar.get(7)));
-                        imd.setPayAccount(payAccount);
+                    String payAccount = String.valueOf(map.get(ar.get(7)));
+                    sbf.append(payAccount);
+                    imd.setPayAccount(payAccount);
                 }
                 if(map.get(ar.get(8))!=null){
-                    String payRemark = String.valueOf(map.get(ar.get(7)));
+                    String payRemark = String.valueOf(map.get(ar.get(8)));
+                    sbf.append(payRemark);
                     imd.setPayRemark(payRemark);
                 }
                 if(map.get(ar.get(9))!=null){
                     String incomeName = String.valueOf(map.get(ar.get(9)));
+                    sbf.append(incomeName);
                     imd.setIncomeName(incomeName);
                 }
                 if(map.get(ar.get(10))!=null){
                     String incomeAccount = String.valueOf(map.get(ar.get(10)));
+                    sbf.append(incomeAccount);
                     imd.setIncomeAccount(incomeAccount);
                 }
                 if(map.get(ar.get(11))!=null){
                     String incomeRemark = String.valueOf(map.get(ar.get(11)));
+                    sbf.append(incomeRemark);
                     imd.setIncomeRemark(incomeRemark);
                 }
                 if(map.get(ar.get(12))!=null){
                     String remark = String.valueOf(map.get(ar.get(12)));
+                    sbf.append(remark);
                     imd.setRemark(remark);
                 }
                 if(map.get(ar.get(13))!=null){
                     String checkName = String.valueOf(map.get(ar.get(13)));
+                    sbf.append(checkName);
                     imd.setCheckName(checkName);
                 }
 
                 imd.setCreateUserId(userId.intValue());
                 imd.setCreateUsername(userName);
-                l.add(imd);
                 if(StringUtils.isNotEmpty(sb.toString())){
                     result.add("excel表第"+row+"行:"+sb.toString());
+                }else{
+                    if(m.get(sbf.toString())!=null){
+                        result.add("excel表第"+row+"行和第"+m.get(sbf.toString())+"行数据重复");
+                    }else{
+                        l.add(imd);
+                    }
                 }
                 row++;
             }
