@@ -224,6 +224,8 @@ public class BudgetServiceImpl implements BudgetService {
                 StringBuffer sbf = new StringBuffer();
                 List<String> ar = JSON.parseObject(a, List.class);
                 Budget imd = new Budget();
+                BudgetExample example = new BudgetExample();
+                BudgetExample.Criteria criteria = example.createCriteria();
                 if(map.get(ar.get(0))!=null){
                     String date = String.valueOf(map.get(ar.get(0)));
                     sbf.append(date);
@@ -236,93 +238,141 @@ public class BudgetServiceImpl implements BudgetService {
                         e.printStackTrace();
                     }
                     imd.setTradeData(parse);
+                    criteria.andTradeDataEqualTo(parse);
+                }else{
+                    criteria.andTradeDataIsNull();
                 }
                 if(map.get(ar.get(1))!=null){
                     String storeName = String.valueOf(map.get(ar.get(1)));
                     sbf.append(storeName);
                     imd.setStoreName(storeName);
+                    criteria.andStoreNameEqualTo(storeName);
+                }else {
+                    criteria.andStoreNameIsNull();
                 }
                 if(map.get(ar.get(2))!=null){
                     String type = String.valueOf(map.get(ar.get(2)));
                     sbf.append(type);
                     imd.setType(type);
+                    criteria.andTypeEqualTo(type);
+                }else{
+                    criteria.andTypeIsNull();
                 }
                 if(map.get(ar.get(3))!=null){
                     String amountRemark = String.valueOf(map.get(ar.get(3)));
                     sbf.append(amountRemark);
                     imd.setAmountRemark(amountRemark);
+                    criteria.andAmountRemarkEqualTo(amountRemark);
+                }else{
+                    criteria.andAmountRemarkIsNull();
                 }
                 if(map.get(ar.get(4))!=null){
                     if(isNumeric(String.valueOf(map.get(ar.get(4))))) {
                         String pay = String.valueOf(map.get(ar.get(4)));
                         sbf.append(pay);
                         imd.setPay(pay);
+                        criteria.andPayEqualTo(pay);
                     }else {
                         sb.append("支出金额不是数值类型;");
                     }
+                }else{
+                    criteria.andPayIsNull();
                 }
                 if(map.get(ar.get(5))!=null){
                     if(isNumeric(String.valueOf(map.get(ar.get(5))))) {
                         String income = String.valueOf(map.get(ar.get(5)));
                         sbf.append(income);
                         imd.setIncome(income);
+                        criteria.andIncomeEqualTo(income);
                     }else{
                         sb.append("收入金额不是数值类型;");
                     }
+                }else{
+                    criteria.andIncomeIsNull();
                 }
                 if(map.get(ar.get(6))!=null){
                     String payName = String.valueOf(map.get(ar.get(6)));
                     sbf.append(payName);
                     imd.setPayName(payName);
+                    criteria.andPayNameEqualTo(payName);
+                }else{
+                    criteria.andPayNameIsNull();
                 }
                 if(map.get(ar.get(7))!=null){
                     String payAccount = String.valueOf(map.get(ar.get(7)));
                     sbf.append(payAccount);
                     imd.setPayAccount(payAccount);
+                    criteria.andPayAccountEqualTo(payAccount);
+                }else{
+                    criteria.andPayAccountIsNull();
                 }
                 if(map.get(ar.get(8))!=null){
                     String payRemark = String.valueOf(map.get(ar.get(8)));
                     sbf.append(payRemark);
                     imd.setPayRemark(payRemark);
+                    criteria.andPayRemarkEqualTo(payRemark);
+                }else {
+                    criteria.andPayRemarkIsNull();
                 }
                 if(map.get(ar.get(9))!=null){
                     String incomeName = String.valueOf(map.get(ar.get(9)));
                     sbf.append(incomeName);
                     imd.setIncomeName(incomeName);
+                    criteria.andIncomeNameEqualTo(incomeName);
+                }else{
+                    criteria.andIncomeNameIsNull();
                 }
                 if(map.get(ar.get(10))!=null){
                     String incomeAccount = String.valueOf(map.get(ar.get(10)));
                     sbf.append(incomeAccount);
                     imd.setIncomeAccount(incomeAccount);
+                    criteria.andIncomeAccountEqualTo(incomeAccount);
+                }else{
+                    criteria.andIncomeAccountIsNull();
                 }
                 if(map.get(ar.get(11))!=null){
                     String incomeRemark = String.valueOf(map.get(ar.get(11)));
                     sbf.append(incomeRemark);
                     imd.setIncomeRemark(incomeRemark);
+                    criteria.andIncomeRemarkEqualTo(incomeRemark);
+                }else {
+                    criteria.andIncomeRemarkIsNull();
                 }
                 if(map.get(ar.get(12))!=null){
                     String remark = String.valueOf(map.get(ar.get(12)));
                     sbf.append(remark);
                     imd.setRemark(remark);
+                    criteria.andRemarkEqualTo(remark);
+                }else {
+                    criteria.andRemarkIsNull();
                 }
                 if(map.get(ar.get(13))!=null){
                     String checkName = String.valueOf(map.get(ar.get(13)));
                     sbf.append(checkName);
                     imd.setCheckName(checkName);
+                    criteria.andCheckNameEqualTo(checkName);
+                }else {
+                    criteria.andCheckNameIsNull();
                 }
 
                 imd.setCreateUserId(userId.intValue());
                 imd.setCreateUsername(userName);
-                if(StringUtils.isNotEmpty(sb.toString())){
-                    result.add("excel表第"+row+"行:"+sb.toString());
-                }else{
-                    if(m.get(sbf.toString())!=null){
-                        result.add("excel表第"+row+"行和第"+m.get(sbf.toString())+"行数据重复");
+                List<Budget> budgets = this.budgetMapper.selectByExample(example);
+                if(budgets==null||budgets.isEmpty()){
+                    if(StringUtils.isNotEmpty(sb.toString())){
+                        result.add("excel表第"+row+"行:"+sb.toString());
                     }else{
-                        m.put(sbf.toString(),row);
-                        l.add(imd);
+                        if(m.get(sbf.toString())!=null){
+                            result.add("excel表第"+row+"行和第"+m.get(sbf.toString())+"行数据重复");
+                        }else{
+                            m.put(sbf.toString(),row);
+                            l.add(imd);
+                        }
                     }
+                }else{
+                    result.add("excel表第"+row+"行数据已存在");
                 }
+
                 row++;
             }
             if(result==null||result.isEmpty()){

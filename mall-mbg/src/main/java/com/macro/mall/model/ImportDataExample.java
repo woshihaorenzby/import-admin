@@ -389,7 +389,7 @@ public class ImportDataExample {
         }
 
         public Criteria andWangwangIdIsNull() {
-            addCriterion("wangwang_id is null");
+            addCriterion("(wangwang_id is null or wangwang_id = '')");
             return (Criteria) this;
         }
 
@@ -461,20 +461,60 @@ public class ImportDataExample {
             addCriterion("a_info like", "%"+value+"%", "aInfo");
             return (Criteria) this;
         }
+        public Criteria andAInfoEqualTo(String value) {
+            addCriterion("a_info =", value, "aInfo");
+            return (Criteria) this;
+        }
+        public Criteria andAInfoIsNull() {
+            addCriterion("(a_info is null or a_info='')");
+            return (Criteria) this;
+        }
         public Criteria andBInfoLike(String value) {
             addCriterion("b_info like", "%"+value+"%", "bInfo");
+            return (Criteria) this;
+        }
+        public Criteria andBInfoEqualTo(String value) {
+            addCriterion("b_info =", value, "bInfo");
+            return (Criteria) this;
+        }
+        public Criteria andBInfoIsNull() {
+            addCriterion("(b_info is null or b_info='')");
             return (Criteria) this;
         }
         public Criteria andRemark1(String value) {
             addCriterion("remark_1 like", "%"+value+"%", "remark1");
             return (Criteria) this;
         }
+        public Criteria andRemark1EqualTo(String value) {
+            addCriterion("remark_1 =", value, "remark1");
+            return (Criteria) this;
+        }
+        public Criteria andRemark1IsNull() {
+            addCriterion("(remark_1 is null or remark_1='')");
+            return (Criteria) this;
+        }
         public Criteria andRemark2(String value) {
             addCriterion("remark_2 like", "%"+value+"%", "remark2");
             return (Criteria) this;
         }
+        public Criteria andRemark2IsNull() {
+            addCriterion("(remark_2 is null or remark_2='')");
+            return (Criteria) this;
+        }
+        public Criteria andRemark2EqualTo(String value) {
+            addCriterion("remark_2 =", value, "remark2");
+            return (Criteria) this;
+        }
         public Criteria andRemark3(String value) {
             addCriterion("remark_3 like", "%"+value+"%", "remark3");
+            return (Criteria) this;
+        }
+        public Criteria andRemark3EqualTo(String value) {
+            addCriterion("remark_3 =", value, "remark3");
+            return (Criteria) this;
+        }
+        public Criteria andRemark3IsNull() {
+            addCriterion("(remark_3 is null or remark_3='')");
             return (Criteria) this;
         }
         public Criteria andAPriceIsNull() {
@@ -538,7 +578,7 @@ public class ImportDataExample {
         }
 
         public Criteria andStoreNameIsNull() {
-            addCriterion("store_name is null");
+            addCriterion("(store_name is null or store_name='')");
             return (Criteria) this;
         }
 
@@ -998,7 +1038,7 @@ public class ImportDataExample {
         }
 
         public Criteria andCodeIsNull() {
-            addCriterion("code is null");
+            addCriterion("(code is null or code ='')");
             return (Criteria) this;
         }
 

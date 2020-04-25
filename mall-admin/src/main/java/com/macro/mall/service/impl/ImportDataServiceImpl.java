@@ -327,6 +327,8 @@ public class ImportDataServiceImpl implements ImportDataService {
                 StringBuffer sbf = new StringBuffer();
                 List<String> ar = JSON.parseObject(a, List.class);
                 ImportData imd = new ImportData();
+                ImportDataExample example = new ImportDataExample();
+                ImportDataExample.Criteria criteria = example.createCriteria();
                 if(map.get(ar.get(0))!=null){
                     String date = String.valueOf(map.get(ar.get(0)));
                     sbf.append(date);
@@ -339,22 +341,34 @@ public class ImportDataServiceImpl implements ImportDataService {
                         e.printStackTrace();
                     }
                     imd.setAddTime(parse);
+                    criteria.andAddtimeEqualTo(parse);
+                }else{
+                    criteria.andAddtimeIsNull();
                 }
 //                "年月日","编号","A信息","旺旺号","A金额","店名","B金额","C佣金","B信息","备注1","备注2","备注3"
                 if(map.get(ar.get(1))!=null){
                     String code = String.valueOf(map.get(ar.get(1)));
                     sbf.append(code);
                     imd.setCode(code);
+                    criteria.andCodeEqualTo(code);
+                }else{
+                    criteria.andCodeIsNull();
                 }
                 if(map.get(ar.get(2))!=null){
                     String aInfo = String.valueOf(map.get(ar.get(2)));
                     sbf.append(aInfo);
                     imd.setaInfo(aInfo);
+                    criteria.andAInfoEqualTo(aInfo);
+                }else{
+                    criteria.andAInfoIsNull();
                 }
                 if(map.get(ar.get(3))!=null){
                     String wangwangId = String.valueOf(map.get(ar.get(3)));
                     sbf.append(wangwangId);
                     imd.setWangwangId(wangwangId);
+                    criteria.andWangwangIdEqualTo(wangwangId);
+                }else{
+                    criteria.andAInfoIsNull();
                 }
                 if(map.get(ar.get(4))!=null){
                     if(isNumeric(String.valueOf(map.get(ar.get(4))))) {
@@ -362,14 +376,20 @@ public class ImportDataServiceImpl implements ImportDataService {
                         BigDecimal aPrice = new BigDecimal(aPrice_str);
                         sbf.append(aPrice_str);
                         imd.setaPrice(aPrice);
+                        criteria.andAPriceEqualTo(aPrice);
                     }else {
                         sb.append("A金额不是数值类型;");
                     }
+                }else{
+                    criteria.andAPriceIsNull();
                 }
                 if(map.get(ar.get(5))!=null){
                     String storeName = String.valueOf(map.get(ar.get(5)));
                     sbf.append(storeName);
                     imd.setStoreName(storeName);
+                    criteria.andStoreNameEqualTo(storeName);
+                }else {
+                    criteria.andStoreNameIsNull();
                 }
                 if(map.get(ar.get(6))!=null){
                     if(isNumeric(String.valueOf(map.get(ar.get(6))))){
@@ -377,9 +397,12 @@ public class ImportDataServiceImpl implements ImportDataService {
                         BigDecimal bPrice = new BigDecimal(bPrice_str);
                         sbf.append(bPrice_str);
                         imd.setbPrice(bPrice);
+                        criteria.andBPriceEqualTo(bPrice);
                     }else{
                         sb.append("B金额不是数值类型;");
                     }
+                }else{
+                    criteria.andBPriceIsNull();
                 }
                 if(map.get(ar.get(7))!=null){
                     if(isNumeric(String.valueOf(map.get(ar.get(7))))) {
@@ -387,41 +410,62 @@ public class ImportDataServiceImpl implements ImportDataService {
                         BigDecimal commission = new BigDecimal(commission_str);
                         sbf.append(commission_str);
                         imd.setCommission(commission);
+                        criteria.andCommissionEqualTo(commission);
                     }else{
                         sb.append("C佣金不是数值类型;");
                     }
+                }else{
+                    criteria.andCommissionIsNull();
                 }
                 if(map.get(ar.get(8))!=null){
                     String bInfo = String.valueOf(map.get(ar.get(8)));
                     sbf.append(bInfo);
                     imd.setbInfo(bInfo);
+                    criteria.andBInfoEqualTo(bInfo);
+                }else{
+                    criteria.andBInfoIsNull();
                 }
                 if(map.get(ar.get(9))!=null){
                     String remark1 = String.valueOf(map.get(ar.get(9)));
                     sbf.append(remark1);
                     imd.setRemark1(remark1);
+                    criteria.andRemark1EqualTo(remark1);
+                }else{
+                    criteria.andRemark1IsNull();
                 }
                 if(map.get(ar.get(10))!=null){
                     String remark2 = String.valueOf(map.get(ar.get(10)));
                     sbf.append(remark2);
                     imd.setRemark2(remark2);
+                    criteria.andRemark2EqualTo(remark2);
+
+                }else{
+                    criteria.andRemark2IsNull();
                 }
                 if(map.get(ar.get(11))!=null){
                     String remark3 = String.valueOf(map.get(ar.get(11)));
                     sbf.append(remark3);
                     imd.setRemark3(remark3);
+                    criteria.andRemark3EqualTo(remark3);
+                }else{
+                    criteria.andRemark3IsNull();
                 }
                 imd.setCreateUserId(userId);
                 imd.setCreateUsername(userName);
-                if(StringUtils.isNotEmpty(sb.toString())){
-                    result.add("excel表第"+row+"行:"+sb.toString());
-                }else{
-                    if(m.get(sbf.toString())!=null){
-                        result.add("excel表第"+row+"行和第"+m.get(sbf.toString())+"数据重复");
-                    }else {
-                        l.add(imd);
-                        m.put(sbf.toString(),row);
+                List<ImportData> importData = this.importDataMapper.selectByExample(example);
+                if(importData==null||importData.isEmpty()){
+                    if(StringUtils.isNotEmpty(sb.toString())){
+                        result.add("excel表第"+row+"行:"+sb.toString());
+                    }else{
+                        if(m.get(sbf.toString())!=null){
+                            result.add("excel表第"+row+"行和第"+m.get(sbf.toString())+"行数据重复");
+                        }else {
+                            l.add(imd);
+                            m.put(sbf.toString(),row);
+                        }
                     }
+                }else{
+                    result.add("excel表第"+row+"行数据已存在");
                 }
                 row++;
             }
@@ -461,7 +505,7 @@ public class ImportDataServiceImpl implements ImportDataService {
         String str = null;
         if (value instanceof Date){
             Date date = (Date) value;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             str = sdf.format(date);
         }else{
             str = String.valueOf(value);

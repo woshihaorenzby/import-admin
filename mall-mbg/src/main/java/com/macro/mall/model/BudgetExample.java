@@ -253,7 +253,7 @@ public class BudgetExample {
         }
 
         public Criteria andStoreNameIsNull() {
-            addCriterion("store_name is null");
+            addCriterion("(store_name is null or store_name = '')");
             return (Criteria) this;
         }
 
@@ -323,7 +323,7 @@ public class BudgetExample {
         }
 
         public Criteria andTypeIsNull() {
-            addCriterion("type is null");
+            addCriterion("(type is null or type = '')");
             return (Criteria) this;
         }
 
@@ -393,7 +393,7 @@ public class BudgetExample {
         }
 
         public Criteria andPayIsNull() {
-            addCriterion("pay is null");
+            addCriterion("(pay is null or pay='')");
             return (Criteria) this;
         }
 
@@ -463,7 +463,7 @@ public class BudgetExample {
         }
 
         public Criteria andIncomeIsNull() {
-            addCriterion("income is null");
+            addCriterion("(income is null or income='')");
             return (Criteria) this;
         }
 
@@ -533,7 +533,7 @@ public class BudgetExample {
         }
 
         public Criteria andPayNameIsNull() {
-            addCriterion("pay_name is null");
+            addCriterion("(pay_name is null or pay_name='')");
             return (Criteria) this;
         }
 
@@ -603,7 +603,7 @@ public class BudgetExample {
         }
 
         public Criteria andPayAccountIsNull() {
-            addCriterion("pay_account is null");
+            addCriterion("(pay_account is null or pay_account ='')");
             return (Criteria) this;
         }
 
@@ -673,7 +673,7 @@ public class BudgetExample {
         }
 
         public Criteria andIncomeNameIsNull() {
-            addCriterion("income_name is null");
+            addCriterion("(income_name is null or income_name='')");
             return (Criteria) this;
         }
 
@@ -743,7 +743,7 @@ public class BudgetExample {
         }
 
         public Criteria andIncomeAccountIsNull() {
-            addCriterion("income_account is null");
+            addCriterion("(income_account is null or income_account ='')");
             return (Criteria) this;
         }
 
@@ -813,7 +813,7 @@ public class BudgetExample {
         }
 
         public Criteria andCheckNameIsNull() {
-            addCriterion("check_name is null");
+            addCriterion("(check_name is null or check_name='')");
             return (Criteria) this;
         }
 
@@ -883,7 +883,7 @@ public class BudgetExample {
         }
 
         public Criteria andCreateUserIdIsNull() {
-            addCriterion("create_user_id is null");
+            addCriterion("create_user_id is null  ");
             return (Criteria) this;
         }
 
@@ -1015,16 +1015,48 @@ public class BudgetExample {
             addCriterion("amount_remark like", "%"+value+"%", "amountRemark");
             return (Criteria) this;
         }
+        public Criteria andAmountRemarkEqualTo(String value) {
+            addCriterion("amount_remark =", value, "amountRemark");
+            return (Criteria) this;
+        }
+        public Criteria andAmountRemarkIsNull() {
+            addCriterion("(amount_remark is null or amount_remark='')");
+            return (Criteria) this;
+        }
         public Criteria andIncomeRemark(String value) {
             addCriterion("income_remark like", "%"+value+"%", "incomeRemark");
+            return (Criteria) this;
+        }
+        public Criteria andIncomeRemarkEqualTo(String value) {
+            addCriterion("income_remark =", value, "incomeRemark");
+            return (Criteria) this;
+        }
+        public Criteria andIncomeRemarkIsNull() {
+            addCriterion("(income_remark is null or income_remark='')");
             return (Criteria) this;
         }
         public Criteria andPayRemark(String value) {
             addCriterion("pay_remark like", "%"+value+"%", "payRemark");
             return (Criteria) this;
         }
+        public Criteria andPayRemarkEqualTo(String value) {
+            addCriterion("pay_remark =", value, "payRemark");
+            return (Criteria) this;
+        }
+        public Criteria andPayRemarkIsNull() {
+            addCriterion("(pay_remark is null or pay_remark='')");
+            return (Criteria) this;
+        }
         public Criteria andRemark(String value) {
             addCriterion("remark like", "%"+value+"%", "remark");
+            return (Criteria) this;
+        }
+        public Criteria andRemarkEqualTo(String value) {
+            addCriterion("remark =", value, "remark");
+            return (Criteria) this;
+        }
+        public Criteria andRemarkIsNull() {
+            addCriterion("(remark is null or remark='')");
             return (Criteria) this;
         }
         public Criteria andAnyColumnLike(String value) {
