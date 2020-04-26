@@ -339,6 +339,7 @@ public class ImportDataServiceImpl implements ImportDataService {
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
+                        sb.append("日期格式错误，请按照提示格式录入;");
                     }
                     imd.setAddTime(parse);
                     criteria.andAddtimeEqualTo(parse);

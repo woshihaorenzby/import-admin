@@ -236,6 +236,7 @@ public class BudgetServiceImpl implements BudgetService {
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
+                        sb.append("日期格式错误，请按照提示格式录入;");
                     }
                     imd.setTradeData(parse);
                     criteria.andTradeDataEqualTo(parse);
